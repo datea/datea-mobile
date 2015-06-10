@@ -123,8 +123,8 @@ textarea {
 }
 
 @mixin hw-accelerate {
-  -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+  //-webkit-transform: translateZ(0);
+  //  transform: translateZ(0);
 }
 
 .user-content {
@@ -896,8 +896,8 @@ ion-nav-view.main-ion-view {
 
     @include hw-accelerate;
 
-    -webkit-transition: transform 300ms ease-in-out;
-    transition: transform 300ms ease-in-out;
+    //-webkit-transition: transform 300ms ease-in-out;
+    //transition: transform 300ms ease-in-out;
 
     &.edit {
       -webkit-transition: none;
@@ -905,8 +905,8 @@ ion-nav-view.main-ion-view {
     }
 
     &.ng-hide, &.invisible {
-      -webkit-transform: translateY(100%);
-      transform: translateY(100%);
+      //-webkit-transform: translateY(100%);
+      //transform: translateY(100%);
     }
 
     .map-transparent {
@@ -1755,8 +1755,8 @@ ion-nav-view.main-ion-view {
 
     @include hw-accelerate;
 
-    -webkit-transition: transform 180ms ease-in-out;
-    transition: transform 180ms ease-in-out;
+    //-webkit-transition: transform 180ms ease-in-out;
+    //transition: transform 180ms ease-in-out;
 
     &.translated {
       -webkit-transform: translate(0, -30%) !important;
@@ -1860,15 +1860,15 @@ ion-nav-view.main-ion-view {
   &.force-map {
 
     .content-map {
-      -webkit-transition: none !important;
-      transition: none !important;
+      //-webkit-transition: none !important;
+      //transition: none !important;
       -webkit-transform: translateX(0%);
       transform: translateX(0%);
     }
 
     .dateos-roll {
-      -webkit-transition: none !important;
-      transition: none !important;
+      //-webkit-transition: none !important;
+      //transition: none !important;
       -webkit-transform: translateX(-100%);
       transform: translateX(-100%);
     }
@@ -2137,16 +2137,14 @@ ion-nav-view.main-ion-view {
   }
 
   // Animations
-
-  // Animations
   &.ng-hide-add {
-    -webkit-animation: fadeOutUp 0.3s;
-    animation: fadeOutUp 0.3s;
+    //-webkit-animation: fadeOutUp 0.3s;
+    //animation: fadeOutUp 0.3s;
   }
   &.ng-hide-remove {
-    -webkit-animation: fadeInDown 0.3s;
-    animation: fadeInDown 0.3s;
-    display: block !important;
+    //-webkit-animation: fadeInDown 0.3s;
+    //animation: fadeInDown 0.3s;
+    //display: block !important;
   }
 }
 
