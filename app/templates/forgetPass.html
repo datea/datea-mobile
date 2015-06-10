@@ -1,0 +1,42 @@
+<ion-view>
+	<ion-content class="landing-bg" scrollbar-y="false">
+		<div class="brand">
+			<div class="limiter">
+				<figure class="logo-home">
+					<img src="images/logo-home.png" alt="Logo Datea.pe"/>
+				</figure>
+				<h4 class="brand-subtitle">Recuperar Contrase&ntilde;a</h4>
+			</div>
+		</div>
+
+		<div class="sign-up">
+			<div class="limiter">
+				<form role="form" name="reset_form" ng-submit="auth.resetPassword()" novalidate>
+					<div class="list">
+						<label class="item item-input">
+							<input type="email" placeholder="correo electrónico" ng-model="reset.email" required>
+						</label>
+					</div>
+					<p class="align-center">
+						<small>Ingresa tu direcci&oacute;n de correo. Al enviar, recibiras un correo con instrucciones para recuperar tu contrase&ntilde;a.</small>
+					</p>
+					<div class="options">
+						<div class="row">
+							<div class="col col-25"></div>
+							<div class="col col-50">
+								<button class="button button-block button-positive icon-right ion-forward" type="submit" ng-disabled="reset_form.$invalid">Enviar</button>
+							</div>
+							<div class="col col-25"><span>&nbsp;</span></div>
+						</div>
+
+						<div class="row responsive-sm secundary">
+							<div class="col">
+								<a class="button button-block button-small button-gray" ui-sref="signIn">Volver</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

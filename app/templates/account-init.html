@@ -1,0 +1,12 @@
+<ion-view>
+  <ion-header-bar align-title="left" class="bar bar-front" ng-controller="HeaderCtrl" ng-show="header.visible">
+      <div class="buttons">
+          <span><img src="images/logo-datea.png" alt="Logo Datea" height="32"> </span>
+      </div>
+      <h1 class="bar-title">Mi cuenta</h1>
+      <div class="buttons pull-right" ng-show="account.status === 1">
+          <a class="button button-icon icon ion-arrow-right-c" ui-sref="home.intro"></a>
+      </div>
+  </ion-header-bar>
+  <div class="single-page" ng-include="'templates/account.html'" ng-init="flow.showWelcomeMsg = true"></div>
+</ion-view>

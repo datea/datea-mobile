@@ -1,0 +1,55 @@
+<ion-view>
+	<ion-content scroll="true" class="landing-bg" scrollbar-y="false" ng-style="flow.containerStyle">
+		<div class="brand">
+			<div class="limiter">
+				<figure class="logo-home">
+					<img src="images/logo-home.png" alt="Logo Datea.pe"/>
+				</figure>
+				<h4 class="brand-subtitle">comparte info útil con tu comunidad</h4>
+			</div>
+		</div>
+
+		<div class="login">
+			<div class="limiter">
+
+				<div class="messagesList" app-messages></div>
+
+				<form role="form" name="signin_form" ng-submit="auth.signIn()" novalidate>
+
+					<p class="align-center">Ingresa con tu cuenta datera:</p>
+
+					<div class="list">
+						<label class="item item-input" ng-class="">
+							<input type="text" placeholder="Nombre de usuario" ng-pattern="/^[A-Za-z0-9]{3,15}$/" ng-model="auth.username" required>
+						</label>
+
+						<label class="item item-input">
+							<input type="password" placeholder="Contraseña" ng-model="auth.password" required>
+						</label>
+					</div>
+
+					<div class="options">
+						<div class="row">
+							<div class="col col-25"></div>
+							<div class="col col-50">
+								<button class="button button-block button-balanced icon-right ion-log-in" type="submit" ng-disabled="signin_form.$invalid">Ingresa</button>
+							</div>
+							<div class="col col-25"></div>
+						</div>
+
+						<div class="row responsive-sm secundary">
+							<div class="col">
+								<a class="button button-block button-small button-gray" href="#/landing">Regresar</a>
+                <a class="button button-block button-small button-gray" href="#/signup-form">Crear cuenta en Datea</a>
+								<a class="button button-block button-small button-gray" href="#/forget-pass">Olvide mi contraseña</a>
+							</div>
+						</div>
+					</div>
+					<!--<code>Validation: {{form.$error|json}}</code><br>
+					<code>form.$valid = {{form.$valid}}</code><br>
+					<code>form.$error.required = {{!!form.$error.required}}</code>-->
+				</form>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

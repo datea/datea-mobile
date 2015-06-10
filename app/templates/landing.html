@@ -1,0 +1,42 @@
+<ion-view>
+  <div class="viewLogin landing-bg">
+    <ion-content scroll="true" class="has-no-header" scrollbar-y="false">
+      <div class="brand">
+        <div class="limiter">
+          <figure class="logo-home"><img src="images/logo-home.png" alt="Logo Datea.pe"/></figure>
+          <h4 class="brand-subtitle">comparte datos útiles con tu comunidad</h4>
+        </div>
+      </div>
+
+      <div class="register">
+        <div class="limiter">
+          <p class="align-center enter-msg">¡Bienvenido! &nbsp;Ingresa con:</p>
+          <div class="register-options">
+            <a class="button button-block icon-left ion-social-facebook" ng-click="flow.withFacebook()">Facebook</a>
+            <a class="button button-block icon-left ion-social-twitter" ng-click="flow.withTwitter()">Twitter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a class="button button-block datea-btn-icon-left" href="#/signin">Datea&nbsp;</a>
+          </div>
+          <!--<span class="align-center"><small> [ no publicamos en tus cuentas sin tu permiso ] </small></span>-->
+        </div>
+      </div>
+
+      <div class="limiter row no-pub">
+        <div class="col align-center"><span>No publicamos en tus cuentas sin tu permiso.</span></div>
+      </div>
+
+      <!--
+      <div class="next-signIn">
+        <div class="limiter row">
+          <div class="col align-center"><span>Si ya tienes cuenta en Datea</span></div>
+        </div>
+        <div class="limiter row">
+          <div class="col col-25"></div>
+          <div class="col col-50">
+            <a class="button button-block button-balanced icon-right ion-log-in" href="#/signin">Ingresa</a>
+          </div>
+          <div class="col col-25"></div>
+        </div>
+      </div> -->
+    </ion-content>
+  </div>
+</ion-view>

@@ -1,0 +1,14 @@
+<div class="popup-container tag-follow-popup" ng-click="follow.close()" ng-class="{'popup-showing active': follow.showPopup}">
+	<div class="popup">
+		<div class="popup-body">
+			<h3>#{{tag.tag}}</h3>
+			<div class="tag-stat" ng-show="tag.dateo_count">{{tag.dateo_count}} dateo<span ng-show="tag.dateo_count > 1">s</span></div>
+			<div class="buttons">
+				<button class="button button-dark button-outline button-block follow-btn icon-left ion-plus" ng-show="!follow.isFollowing" ng-click="follow.follow()">seguir etiqueta</button>
+				<button class="button button-dark button-outline button-block follow-btn icon-left ion-close-circled" ng-show="follow.isFollowing" ng-click="follow.unfollow()">dejar de seguir</button>
+				<button class="button button-dark button-outline button-block see-btn icon-left ion-eye" ng-click="follow.showDateos()">ver dateos</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="backdrop visible" ng-class="{'active': follow.showPopup}"></div>

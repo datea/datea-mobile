@@ -1,0 +1,29 @@
+{
+  "name": "dateaMobileApp",
+  "author": "Datea <contacto@datea.pe>",
+  "private": "true",
+  "devDependencies": {},
+  "dependencies": {
+    "ionic": "~1.0.0",
+    "angular": "~1.4.0",
+    "ngCordova": "~0.1.17-alpha",
+    "angular-resource": "~1.4.0",
+    "lodash": "~3.9.3",
+    "angular-checklist-model": "~0.2.4",
+    "angular-facebook": "~0.2.3",
+    "angular-i18n": "~1.4.0",
+    "angular-leaflet-directive": "~0.8.1",
+    "angular-local-storage": "~0.2.2",
+    "angular-sanitize": "~1.4.0",
+    "angular-ui-router": "~0.2.15",
+    "animate.css": "~3.3.0",
+    "font-awesome": "~4.3.0",
+    "leaflet": "~0.7.3",
+    "leaflet.markerclusterer": "~0.4.0"
+  },
+  "resolutions": {
+    "angular-sanitize": "~1.4.0",
+    "angular-ui-router": "~0.2.15",
+    "angular": "~1.4.0"
+  }
+}

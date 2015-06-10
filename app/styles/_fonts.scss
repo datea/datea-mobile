@@ -1,0 +1,100 @@
+/* ==========================================================================
+    Module Fonts
+========================================================================== */
+$base-font-path   : "../fonts" !default;
+$font-version     : "1.1" !default;
+$oswald-family    : "Oswald" !default;
+$sans-pro-family  : "Source Sans Pro" !default;
+$arrows-font      : "Arrows" !default;
+$roboto-family    : "Roboto" !default;
+$oldsansblack-family : "OldSansBlack" !default;
+
+
+/* Oswald font */
+@font-face {
+    font-family: $oswald-family;
+    src: url("#{$base-font-path}/Oswald-Light.ttf?v=#{$font-version}") format("truetype"),
+         url("#{$base-font-path}/Oswald-Light.woff?v=#{$font-version}") format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: $oswald-family;
+    src: url("#{$base-font-path}/Oswald-Regular.ttf?v=#{$font-version}") format("truetype"),
+         url("#{$base-font-path}/Oswald-Regular.woff?v=#{$font-version}") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $oswald-family;
+    src: url("#{$base-font-path}/Oswald-Bold.ttf?v=#{$font-version}") format("truetype"),
+         url("#{$base-font-path}/Oswald-Bold.woff?v=#{$font-version}") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+/* Roboto font */
+@font-face {
+    font-family: $roboto-family;
+    src: url("#{$base-font-path}/Roboto-Thin.ttf?v=#{$font-version}") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: $roboto-family;
+    src: url("#{$base-font-path}/Roboto-Light.ttf?v=#{$font-version}") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $roboto-family;
+    src: url("#{$base-font-path}/Roboto-Bold.ttf?v=#{$font-version}") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+
+/* Source Sans Pro font */
+@font-face {
+    font-family: $sans-pro-family;
+    src: url("#{$base-font-path}/SourceSansPro-Regular.ttf?v=#{$font-version}") format("truetype"),
+         url("#{$base-font-path}/SourceSansPro-Regular.woff?v=#{$font-version}") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $sans-pro-family;
+    src: url("#{$base-font-path}/SourceSansPro-Semibold.ttf?v=#{$font-version}") format("truetype"),
+         url("#{$base-font-path}/SourceSansPro-Semibold.woff?v=#{$font-version}") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: $arrows-font;
+    src: url("#{$base-font-path}/PWNewArrows.ttf?v=#{$font-version}") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+/* Helvetica condensed */
+@font-face {
+    font-family: $oldsansblack-family;
+    src: url("#{$base-font-path}/oldsansblack/OldSansBlack.ttf?v=#{$font-version}") format("truetype"),
+         url("#{$base-font-path}/oldsansblack/OldSansBlack.woff?v=#{$font-version}") format("woff"),
+         url("#{$base-font-path}/oldsansblack/OldSansBlack.eot?v=#{$font-version}") format("eot"),
+         url("#{$base-font-path}/oldsansblack/OldSansBlack.svg?v=#{$font-version}") format("svg");
+    font-weight: bold;
+    font-style: normal;
+}

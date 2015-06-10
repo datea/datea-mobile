@@ -1,0 +1,95 @@
+<ion-view class="dateo-modal">
+	<ion-content class="tag-view tag-view2 dateo-modal-content invisible" ng-class="{invisible: !tags.showView}" scroll="true" ng-hide="tags.hideView" delegate-handle="tags-modal">
+		{{vis.current}}
+		<div class="map-transparent" ng-click="flow.showMap()" ng-show="flow.vis.current == 'map'"></div>
+
+		<div class="welcome">
+      <img src="images/daterito1.png">
+      <div class"uname">Hola <b>{{::user.username}}</b>,</div>
+      <div class="pregunta">¿Qué quieres datear hoy?</div>
+      <!--
+			<img src="{{user.image | userImg}}">
+			<div class="datero">dater@</div>
+			<div class="uname">{{user.username}}</div>
+      -->
+      <button class="button button-clear search-btn icon ion-android-search" ng-click="flow.openSearch()"></button>
+		</div>
+
+		<div class="list tag-view-content">
+
+			<div class="item item-divider item-subtitle" ng-show="tags.followed.length">En etiquetas que sigo:</div>
+
+			<div class="tag-entry tag-followed" ng-repeat="etiqueta in tags.followed track by etiqueta.id" ng-show="!tags.noFollowed">
+	     	<ion-item class="item-stable" ng-click="flow.toggleButtons('f'+etiqueta.id)" ng-class="{active: flow.isGray == 'f'+etiqueta.id}">
+	     		<div class="tag"><span class="color-demo viscolor-{{($index % 20) + 1}}"></span> #{{::etiqueta.tag }}</div>
+	     		<div class="campaign-hint" ng-show="etiqueta.campaigns.length"><span class="hint"><span ng-show="etiqueta.campaigns.length > 1">{{::etiqueta.campaigns.length}} </span>iniciativa<span ng-show="{{etiqueta.campaigns.length > 1}}">s</span> de <br><span ng-repeat="camp in etiqueta.campaigns track by camp.id | limitTo:2">{{::camp.username}}<span ng-if="!$last">,</span></span></span></div>
+	     	</ion-item>
+	      <ion-item class="item-accordion" ng-style="{ height: flow.accordionHeight('f'+etiqueta.id)}">
+
+          <div class="campaigns-title" ng-show="flow.campaigns.length">Iniciativa<span ng-show="flow.campaigns.length > 1">s en etiqueta</span></div>
+
+          <div class="campaign-entry" ng-repeat="campaign in flow.campaigns track by campaign.id">
+            <div class="item item-thumbnail-left" ng-click="flow.showCampaign(campaign.id)">
+              <img ng-src="{{::campaign.image.image | campaignImg}}" />
+              <h2>{{campaign.name}}</h2>
+              <div>
+                <div class="user">por {{::campaign.user.username}}</div>
+                <div class="stats">
+                  <span class="stat-dateos" ng-show="campaign.main_tag.dateo_count"><i class="icon-burbuja"></i> {{::campaign.main_tag.dateo_count}} dateo<span ng-show="campaign.main_tag.dateo_count > 1">s</span></span>
+                  <span class="stat-followers" ng-show="campaign.main_tag.follow_count"><i class="icon ion-android-person"></i> {{::campaign.main_tag.follow_count}} seguidor<span ng-show="campaign.main_tag.follow_count > 1">es</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-bar">
+            <button class="button button-datea" ng-click="flow.datear(etiqueta)"><span>Datear</span> <i class="icon icon-burbuja"></i></button>
+            <button class="button" ng-click="flow.searchByTag(etiqueta)">Ver <i class="icon ion-eye"></i></button>
+            <button class="button button-unfollow" ng-show="etiqueta.isFollowing" ng-click="flow.unFollow(etiqueta)">No seguir <i class="icon ion-close-circled"></i></button>
+            <button class="button" ng-show="!etiqueta.isFollowing" ng-click="flow.doFollow(etiqueta)">Seguir <i class="icon ion-plus"></i></button>
+          </div>
+
+	      </ion-item>
+	    </div>
+
+	    <div class="no-follow-msg" ng-show="!tags.followed.length">Aún no sigues etiquetas! Para seguirlas pulsa sobre ellas, o busca iniciativas (en el menú).</div>
+
+			<div class="item item-divider item-subtitle" ng-show="tags.trending.length">En tendencias:</div>
+
+			<div class="tag-entry tag-trending" ng-repeat="etiqueta in tags.trending track by etiqueta.id" ng-show="!tags.noFollowed">
+	     	<ion-item class="item-stable" ng-click="flow.toggleButtons('t'+etiqueta.id)" ng-class="{active: flow.isGray == 't'+etiqueta.id}"><div class="tag">#{{ etiqueta.tag }}</div>
+	        <div class="campaign-hint" ng-show="etiqueta.campaigns.length"><span class="hint"><span ng-show="etiqueta.campaigns.length > 1">{{etiqueta.campaigns.length}} </span>iniciativa<span ng-show="{{etiqueta.campaigns.length > 1}}">s</span> de <br><span ng-repeat="camp in etiqueta.campaigns track by camp.id | limitTo:2">{{camp.username}}<span ng-if="!$last">,</span></span></span></div>
+	      </ion-item>
+	      <ion-item class="item-accordion" ng-style="{ height: flow.accordionHeight('t'+etiqueta.id)}">
+
+          <div class="campaigns-title" ng-show="flow.campaigns.length">Iniciativa<span ng-show="flow.campaigns.length > 1">s en etiqueta</span></div>
+
+          <div class="campaign-entry" ng-repeat="campaign in flow.campaigns track by campaign.id">
+            <div class="item item-thumbnail-left" ng-click="flow.showCampaign(campaign.id)">
+              <img ng-src="{{campaign.image.image | campaignImg}}" />
+              <h2>{{campaign.name}}</h2>
+              <div>
+                <div class="user">por {{campaign.user.username}}</div>
+                <div class="stats">
+                  <span class="stat-dateos" ng-show="campaign.main_tag.dateo_count"><i class="icon-burbuja"></i> {{campaign.main_tag.dateo_count}} dateo<span ng-show="campaign.main_tag.dateo_count > 1">s</span></span>
+                  <span class="stat-followers" ng-show="campaign.main_tag.follow_count"><i class="icon ion-android-person"></i> {{campaign.main_tag.follow_count}} seguidor<span ng-show="campaign.main_tag.follow_count > 1">es</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-bar">
+             <button class="button button-datea" ng-click="flow.datear(etiqueta)"><span>Datear</span> <i class="icon icon-burbuja"></i></button>
+             <button class="button" ng-click="flow.searchByTag(etiqueta)">Ver <i class="icon ion-eye"></i></button>
+             <button class="button" ng-show="!etiqueta.isFollowing" ng-click="flow.doFollow(etiqueta)">Seguir <i class="icon ion-plus"></i></button>
+             <button class="button button-unfollow" ng-show="etiqueta.isFollowing" ng-click="flow.unFollow(etiqueta)">No seguir <i class="icon ion-close-circled"></i></button>
+          </div>
+
+	      </ion-item>
+	    </div>
+	    <div class="search-campaigns-btn">
+	    	<button type="button" class="button button-dark button-outline icon-left" ui-sref="home.campaigns"><i class="icon ion-pound"></i> Buscar iniciativas</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

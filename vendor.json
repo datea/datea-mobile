@@ -1,0 +1,11 @@
+[
+    "bower_components/ionic/release/js/ionic.bundle.js",
+    "bower_components/angular-resource/angular-resource.js",
+    "bower_components/leaflet/dist/leaflet.js",
+    "bower_components/leaflet.markerclusterer/dist/leaflet.markercluster.js",
+    "bower_components/angular-local-storage/dist/angular-local-storage.js",
+    "bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js",
+    "bower_components/angular-i18n/angular-locale_es-pe.js",
+    "bower_components/angular-checklist-model/checklist-model.js",
+    "bower_components/ngCordova/dist/ng-cordova.js"
+]

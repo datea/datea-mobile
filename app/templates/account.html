@@ -1,0 +1,96 @@
+
+<div class="account-edit-view" ng-show="flow.showEditPage">
+
+    <ion-content scroll="true" scrollbar-y="false" ng-style="flow.containerStyle">
+        <div class="msg-account" ng-show="flow.showWelcomeMsg">
+            <div class="limiter" ng-show="flow.isNewUser">
+                <div ng-show="account.status === 1">
+                    <h5 class="light">Bienvenid@</h5>
+                    <p>Tu cuenta datera ha sido habilitada. Si deseas puedes cambiar el nombre de usuario u otra información de tu perfil.</p>
+
+                    <div class="row">
+                        <div class="col"><span>&nbsp;</span></div>
+                        <div class="col">
+                            <a class="button button-block button-stable icon-right ion-chevron-right" ui-sref="home.intro">Continuar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-show="account.status === 0">
+                    <h5 class="light">Bienvenid@</h5>
+                    <p>Sólo queda completar un paso: debes ingresar y validar tu dirección de correo.<br>
+                    Si deseas, puedes cambiar tu nombre de usuario, imagen e información de perfil.</p>
+                    <br>
+                </div>
+            </div>
+
+            <div class="limiter" ng-show="!flow.isNewUser && account.status === 0">
+                <p>Sólo queda completar un paso: debes ingresar y validar tu dirección de correo.</p>
+                <br>
+            </div>
+        </div>
+
+        <div class="account padding-top" ng-controller="AccountCtrl">
+            <div class="limiter">
+                <form role="form" name="account_form" ng-submit="account.save()"  novalidate>
+
+                    <div class="list">
+                        <h4 class="center">Cuenta de usuario</h4>
+                        <label class="item item-input">
+                            <span class="input-label">usuario</span>
+                            <input type="text" placeholder="nombre de usuario" ng-model="account.username" required>
+                        </label>
+
+                        <label class="item item-input">
+                            <span class="input-label">email</span>
+                            <input type="email" placeholder="correo electrónico" ng-model="account.email" required>
+                        </label>
+
+                        <br>
+
+                        <h4 class="center">Perfil</h4>
+                        <small>Imagen </small>
+                        <figure class="center item-image">
+                            <a class="relative inline" ng-click="account.showConfirm()">
+                                <span class="ion-edit absolute-TopRight">&nbsp;</span>
+                                <img id="myImage" NG-src="{{account.image_large | userImg}}" alt="Usuario Image"  style='display:block; width:146px; height:146px;' />
+                            </a>
+                        </figure>
+
+                        <br>
+                        <label class="item item-input">
+                            <span class="input-label">nombre</span>
+                            <input type="text" placeholder="nombre completo"  id="full_name" ng-model="account.full_name">
+                        </label>
+
+                        <br><br>
+                        <p><small>Cambia tu contrase&ntilde;a: </small> </p>
+                        <label class="item item-input">
+                            <span class="input-label ion-unlocked">&nbsp;</span>
+                            <input type="password" placeholder="contraseña" ng-model="account.password">
+                        </label>
+
+                        <label class="item item-input">
+                            <span class="input-label ion-locked">&nbsp;</span>
+                            <input type="password" placeholder="repetir contraseña" ng-model="account.repassword" password-match="account.password">
+                        </label>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col"><span>&nbsp;</span></div>
+                            <div class="col align-right">
+                                <button class="button button-green icon-right ion-checkmark" ng-disabled="account_form.$invalid" type="submit">Guardar</button>
+                            </div>
+                        </div>
+                        <span ng-bind="auth.message"></span>
+                    </div>
+
+                </form>
+                <hr>
+                <!--<pre>Validation: {{form.$error|json}}</pre>-->
+
+            </div>
+        </div>
+    </ion-content>
+</div>

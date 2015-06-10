@@ -1,0 +1,25 @@
+<div class="dateo dateo-teaser">
+    <div class="user-header">
+        <div class="uimg" style="background-image: url({{dateo.user.image_small | userImg}});"></div>
+        <h3 class="uname">{{::dateo.user.username}}</h3>
+        <div class="date">{{::dateo.date || dateo.created | date:dateFormat}}</div>
+    </div>
+
+    <div class="tags">
+        <div class="tag" ng-repeat="tag in dateo.tags track by $index">
+            <a ng-click="flow.openFollowTag( tag )">#{{::tag.tag}}</a>
+        </div>
+    </div>
+
+    <p class="extract" ng-bind-html="dateo.extract"></p>
+
+    <figure class="images" ng-show="dateo.images.length">
+        <img ng-repeat="image in dateo.images | limitTo:2" ng-src="{{::image.image | apiImg}}" alt="Dateo Image">
+    </figure>
+
+    <div class="stats">
+        <span class="stat-dateos" ng-show="campaign.main_tag.dateo_count"><i class="icon-burbuja"></i> {{::campaign.main_tag.dateo_count}} dateo<span ng-show="campaign.main_tag.dateo_count > 1">s</span></span>
+        <span class="stat-followers" ng-show="campaign.main_tag.follow_count"><i class="icon ion-android-person"></i> {{::campaign.main_tag.follow_count}} seguidor<span ng-show="campaign.main_tag.follow_count > 1">es</span></span>
+    </div>
+
+</div>

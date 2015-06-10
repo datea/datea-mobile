@@ -1,0 +1,65 @@
+<ion-view class="intro closed" ng-class="{closed: !intro.showIntro, open: intro.showIntro}">
+
+	<div class="step1 step" ng-show="intro.step == 1">
+
+		<div class="search">
+			<span class="arrow">&#114;</span>
+			<div class="text">
+				Busca dateos y usa filtros para ver sólo lo que sigues o tus propios dateos.
+			</div>
+		</div>
+
+		<div class="vis-btn">
+			<span class="arrow">&#116;</span>
+			<div class="text">
+				Ver dateos en mapa o listado.
+			</div>
+		</div>
+
+		<div class="datear-btn">
+			<span class="arrow">&#113;</span>
+			<div class="text">Para datear, pulsa aquí</div>
+		</div>
+
+		<div class="welcome">
+			<p><img src="images/daterito1.png">Hola! Unos tips para empezar:</p>
+			<div class="next-btn">
+				<button class="button button-stable button-outline icon-left ion-close pull-left button-close" ng-click="intro.close()">Cerrar</button>
+				<button class="button button-stable button-outline icon-right ion-chevron-right pull-right" ng-click="intro.step = 2">Siguiente</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="step2 step" ng-show="intro.step == 2">
+		<div class="htags">
+			<span class="arrow">&#114;</span>
+			<div class="text">
+				<p>Acá encuentras las #etiquetas que sigues y tendencias. Buena manera de empezar a datear o navegar.</p>
+				<p>Las #etiquetas estructuran el contenido en Datea. Síguelas pulsando sobre ellas. Así puedes participar y navegar dateos sobre una temática.</p>
+				<div class="next-btn">
+					<button class="button button-stable button-outline icon-right ion-chevron-right" ng-click="intro.step = 3">Siguiente</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="step3 step" ng-show="intro.step == 3">
+		<div class="campaigns">
+			<span class="arrow">&#114;</span>
+
+			<div class="text">
+				<p>Las iniciativas:</p>
+				<ul>
+					<li>son acciones de dateo impulsadas por un individuo u organización.</li>
+					<li>tienen una #etiqueta principal y opcionalmente etiquetas secundarias para categorizar el contenido.</li>
+				</ul>
+				<p>Ahora te recomendamos buscar iniciativas para participar.</p>
+				<div class="btns">
+					<p><a class="button button-block button-outline button-stable" ui-sref="home.campaigns">Ver iniciativas</a></p>
+					<p><a class="button button-block button-outline button-stable" ng-click="intro.close()">Datear ya!</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</ion-view>
