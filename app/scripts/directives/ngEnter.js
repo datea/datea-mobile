@@ -12,6 +12,7 @@ angular.module('dateaMobileApp')
 					scope.$eval(attrs.ngEnter);
 				});
 				event.preventDefault();
+				cordova.plugins.Keyboard.close();
 			}
 		});
 	};

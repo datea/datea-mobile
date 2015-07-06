@@ -1,7 +1,7 @@
 'use strict';
 /* Ionic dateaMobileApp App */
 
-angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.router', 'LocalStorageModule', 'leaflet-directive', 'ngAnimate', 'checklist-model'])
+angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.router', 'LocalStorageModule', 'leaflet-directive', 'checklist-model'])
 
 
 .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$ionicConfigProvider',
@@ -16,6 +16,8 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
         ionic.Platform.ready(function() {
             // FacebookProvider.init( fbAppId );
             OAuth.initialize('du8nXdQmkjgR3nrfsjHxO07INhk');
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            cordova.plugins.Keyboard.disableScroll(true);
         });
 
         //if(ionic.Platform.isAndroid())

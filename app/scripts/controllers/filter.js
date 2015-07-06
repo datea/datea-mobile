@@ -67,9 +67,10 @@ angular.module('dateaMobileApp')
     };
 
     $scope.filter.showForm = function(val) {
+      console.log("hey wtf");
       $scope.filter.showFullSearch = val;
       if (val) {
-        $timeout(function(){document.getElementById('inputSearch').focus();});
+        $timeout(function(){document.getElementById('inputSearch').focus();}, 100);
         openedState = {filter: $scope.query.filter, search: $scope.query.inputSearch};
       }else{
         if ($scope.query.inputSearch !==  openedState.search || $scope.query.filter !==  openedState.filter) {
@@ -173,6 +174,8 @@ angular.module('dateaMobileApp')
 
     $scope.$on('search:open', function () {
       $scope.filter.showForm(true);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      console.log('hey search open');
     });
 
     $scope.$on('$stateChangeSuccess', function (fromState, toState) {

@@ -1,6 +1,6 @@
 <ion-view class="intro closed" ng-class="{closed: !intro.showIntro, open: intro.showIntro}">
 
-	<div class="step1 step" ng-show="intro.step == 1">
+	<div class="step1 step" ng-class="{'ng-hide': intro.step != 1}">
 
 		<div class="search">
 			<span class="arrow">&#114;</span>
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	<div class="step2 step" ng-show="intro.step == 2">
+	<div class="step2 step" ng-class="{'ng-hide': intro.step != 2}">
 		<div class="htags">
 			<span class="arrow">&#114;</span>
 			<div class="text">
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-	<div class="step3 step" ng-show="intro.step == 3">
+	<div class="step3 step" ng-class="{'ng-hide': intro.step != 3}">
 		<div class="campaigns">
 			<span class="arrow">&#114;</span>
 

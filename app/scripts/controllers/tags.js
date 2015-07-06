@@ -45,6 +45,7 @@ angular.module('dateaMobileApp')
                   t.isFollowing = Follow.isFollowingTag(t);
                   return t;
               });
+              console.log('trending response', $scope.tags.trending);
               Campaign.trendingTags = response.objects;
               Campaign.loadCampaigns();
           } );

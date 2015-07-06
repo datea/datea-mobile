@@ -1,10 +1,10 @@
 
-<div class="account-edit-view" ng-show="flow.showEditPage">
+<div class="account-edit-view" ng-class="{'ng-hide' : !flow.showEditPage}">
 
     <ion-content scroll="true" scrollbar-y="false" ng-style="flow.containerStyle">
-        <div class="msg-account" ng-show="flow.showWelcomeMsg">
-            <div class="limiter" ng-show="flow.isNewUser">
-                <div ng-show="account.status === 1">
+        <div class="msg-account" ng-class="{'ng-hide': !flow.showWelcomeMsg}">
+            <div class="limiter" ng-class="{'ng-hide': !flow.isNewUser}">
+                <div ng-class="{'ng-hide': account.status !== 1}">
                     <h5 class="light">Bienvenid@</h5>
                     <p>Tu cuenta datera ha sido habilitada. Si deseas puedes cambiar el nombre de usuario u otra información de tu perfil.</p>
 
@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <div ng-show="account.status === 0">
+                <div ng-class="{'ng-hide': account.status !== 0}">
                     <h5 class="light">Bienvenid@</h5>
                     <p>Sólo queda completar un paso: debes ingresar y validar tu dirección de correo.<br>
                     Si deseas, puedes cambiar tu nombre de usuario, imagen e información de perfil.</p>
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="limiter" ng-show="!flow.isNewUser && account.status === 0">
+            <div class="limiter" ng-class="{'ng-hide': flow.isNewUser && account.status !== 0}">
                 <p>Sólo queda completar un paso: debes ingresar y validar tu dirección de correo.</p>
                 <br>
             </div>

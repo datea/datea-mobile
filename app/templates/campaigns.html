@@ -1,4 +1,4 @@
-<ion-view class="page" ng-hide="!nav.pages.show">
+<ion-view class="page" ng-class="{'ng-hide': !nav.pages.show}" >
 	<ion-content class="campaigns-view" delegate-handle="campaignScroll">
 		<div class="search-form">
 			  <label class="item item-input">
@@ -7,13 +7,13 @@
 			  </label>
 			  <div class="item item-input item-select actions">
 			  	<select ng-model="query.category" ng-options="category.id as category.name for category in flow.categories" ng-change="flow.doQuery();"></select>
-          <div class="num-hits" ng-show="data.numHits > 0">{{data.numHits}} resultado<span ng-show="data.numHits > 1">s</span></div>
+          <div class="num-hits" ng-class="{'ng-hide': data.numHits === 0}">{{data.numHits}} resultado<span ng-class="{'ng-hide': data.numHits <= 1}">s</span></div>
 			  </div>
 		</div>
 
 		<div class="results">
 
-			<div class="no-results" ng-show="data.noResults">Sin resultados <i class="fa fa-meh-o"></i><br>Vuélvelo a intentar.</div>
+			<div class="no-results" ng-class="{'ng-hide': !data.noResults}">Sin resultados <i class="fa fa-meh-o"></i><br>Vuélvelo a intentar.</div>
 
 			<div class="list campaign-list">
 				<div class="campaign-entry" ng-repeat="campaign in data.campaigns track by campaign.id">
@@ -24,15 +24,15 @@
 							<div class="tag">#{{::campaign.main_tag.tag}}</div>
 							<div class="user">por {{::campaign.user.username}}</div>
 							<div class="stats">
-								<span class="stat-dateos" ng-show="campaign.main_tag.dateo_count"><i class="icon-burbuja"></i> {{::campaign.main_tag.dateo_count}} dateo<span ng-show="campaign.main_tag.dateo_count > 1">s</span></span>
-								<span class="stat-followers" ng-show="campaign.main_tag.follow_count"><i class="icon ion-android-person"></i> {{::campaign.main_tag.follow_count}} seguidor<span ng-show="campaign.main_tag.follow_count > 1">es</span></span>
+								<span class="stat-dateos" ng-class="{'ng-hide': !campaign.main_tag.dateo_count}"><i class="icon-burbuja"></i> {{::campaign.main_tag.dateo_count}} dateo<span ng-class="{'ng-hide': campaign.main_tag.dateo_count <= 1}">s</span></span>
+								<span class="stat-followers" ng-class="{'ng-hide': !campaign.main_tag.follow_count}"><i class="icon ion-android-person"></i> {{::campaign.main_tag.follow_count}} seguidor<span ng-class="{'ng-hide': campaign.main_tag.follow_count <= 1}">es</span></span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="load-more" ng-show="data.campaigns.length < data.numHits">
+			<div class="load-more" ng-class="{'ng-hide': data.campaigns.length >= data.numHits}">
 				<button class="button button-outline button-stable" ng-click="flow.loadMore()">
 				  Ver más resultados
 				</button>

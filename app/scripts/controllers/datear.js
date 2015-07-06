@@ -644,12 +644,13 @@ angular.module('dateaMobileApp')
             };*/
 
             $scope.datear.editContent = function () {
-                Nav.header.noButtons = true;
-                var contentElem = document.getElementById('datear-contenido');
                 $scope.datear.editingContent = true;
-                $timeout(function () {
+                Nav.header.noButtons = true;
+                setTimeout(function () {
+                    var contentElem = document.getElementById('datear-contenido');
+                    console.log('textarea focus', contentElem);
                     contentElem.focus();
-                    try { cordova.plugins.Keyboard.show(); } catch(err) {}
+                    //try { cordova.plugins.Keyboard.show(); } catch(err) {};
                 });
             };
 
@@ -689,7 +690,7 @@ angular.module('dateaMobileApp')
                 /*if (document.getElementById('datear-hashtags') === document.activeElement) {
                     $ionicScrollDelegate.$getByHandle('datear-form-modal').scrollBottom();
                 }*/
-                console.log('kb show', $scope.datear.containerStyle);
+                console.log('kb show', args.keyboardHeight);
             });
 
             $scope.$on('keyboard:hide', function () {

@@ -3,39 +3,41 @@
   <ion-side-menu-content drag-content="false">
 
     <ion-view class="home-view">
-
-      <ion-header-bar align-title="left" class="bar bar-front" ng-controller="HeaderCtrl" ng-show="header.visible">
-          <div class="buttons logo" ng-hide="header.showBackBtn || header.noButtons" ng-click="header.toggleSideMenu()">
+      <ion-header-bar align-title="left" class="bar bar-front" ng-controller="HeaderCtrl" ng-class="{'ng-hide': !header.visible}">
+          <div class="buttons logo" ng-class="{'ng-hide': header.showBackBtn || header.noButtons}" ng-click="header.toggleSideMenu()">
             <i class="icon ion-android-menu"></i>
-              <span><img src="images/mobile-icon-3.png" alt="Logo Datea" height="32"> </span>
+              <span><img src="images/datea-logo-movil.png" alt="Logo Datea" height="32"> </span>
           </div>
-          <a class="back-btn" ng-click="header.goBack()" ng-show="header.showBackBtn && !header.noButtons">
-            <i class="back-icon icon ion-ios-arrow-back" ng-show="!header.stateData.backBtnLabel"></i> <span class="back-label">{{header.stateData.backBtnLabel || header.backBtnLabel}}</span>
+          <a class="back-btn" ng-click="header.goBack()" ng-class="{'ng-hide': !header.showBackBtn || header.noButtons}">
+            <i class="back-icon icon ion-ios-arrow-back" ng-class="{'ng-hide': header.stateData.backBtnLabel}"></i> <span class="back-label">{{header.stateData.backBtnLabel || header.backBtnLabel}}</span>
           </a>
-          <h1 class="bar-title" ng-show="!!header.stateData.title" ng-bind-html="header.stateData.title"></h1>
-          <div class="buttons main-menu pull-right" ng-hide="header.showBackBtn || header.noButtons">
+          <h1 class="bar-title" ng-class="{'ng-hide': !header.stateData.title}" ng-bind-html="header.stateData.title"></h1>
+          <div class="buttons main-menu pull-right" ng-class="{'ng-hide': header.showBackBtn || header.noButtons}">
               <!--<a class="button button-icon icon ion-ios7-bell"></a>-->
               <a class="button button-icon icon first ion-android-home" ng-class="{'active': state.current.name == 'home.hello'}" ng-click="header.poundLink()"></a>
               <a class="button button-icon icon ion-android-notifications" ui-sref="home.notifications"></a>
-              <div class="notification-sign" ng-show="header.notify.unreadCount">{{header.notify.unreadCount}}</div>
+              <div class="notification-sign" ng-class="{'ng-hide': !header.notify.unreadCount}">{{header.notify.unreadCount}}</div>
           </div>
       </ion-header-bar>
 
-      <div class="dateos-filter absolute-TopLeft" ng-show="nav.search.visible" ng-controller="FilterCtrl" ng-class="{opened: filter.showFullSearch}">
+      <div class="dateos-filter absolute-TopLeft" ng-controller="FilterCtrl" ng-class="{opened: filter.showFullSearch, 'ng-hide': !nav.search.visible}">
 
-        <a class="button toggle-main-view" href ng-click="flow.toggleMainView()" ng-hide="filter.showFullSearch">
+        <a class="button toggle-main-view" href ng-click="flow.toggleMainView()" ng-class="{'ng-hide': filter.showFullSearch}">
           <i class="icon" ng-class="{map: 'fa fa-list-ul', list: 'icon-pin2'}[nav.vis.current]"></i>
         </a>
 
-        <label class="search-bar item-input" ng-hide="filter.showFullSearch">
-            <i class="icon lupa ion-ios-search-strong"></i>&nbsp;&nbsp;
-            <i class="icon icon-inside {{filter.iconCurrent}}" ng-show="query.filter != 'all'"></i>
-            <input type="text" placeholder="{{filter.placeholder}}" ng-model="query.inputSearch" ng-click="filter.showForm(true)">
-          </label>
+        <label class="search-bar item-input" ng-class="{'ng-hide': filter.showFullSearch}" ng-click="filter.showForm(true)">
+          <i class="icon lupa ion-ios-search-strong"></i>&nbsp;&nbsp;
+          <i class="icon icon-inside {{filter.iconCurrent}}" ng-class="{'ng-hide': query.filter == 'all'}"></i>
+          <!--
+          <input type="text" placeholder="{{filter.placeholder}}" ng-model="query.inputSearch" ng-click="filter.showForm(true)">
+          -->
+          <div class="current-search">{{query.inputSearch || filter.placeholder}}</div>
+        </label>
 
-        <form class="full-search" novalidate role="form" name="form" ng-show="filter.showFullSearch">
+        <form class="full-search" novalidate role="form" name="form" ng-class="{'ng-hide': !filter.showFullSearch}">
 
-          <div class="autocomplete" ng-show="filter.showAutocomplete">
+          <div class="autocomplete" ng-class="{'ng-hide': !filter.showAutocomplete}">
                 <ion-scroll direction="y" scrollbar-y="true" delegate-handle="scrollComplete">
                     <a class="tag-item" ng-repeat="auto in filter.itemsAutocomplete track by $index" ng-click="filter.refreshInput( auto )">{{auto}}</a>
                 </ion-scroll>
@@ -43,10 +45,10 @@
 
             <label class="item-input search-field">
               <i class="icon ion-ios-search-strong"></i>
-              <input type="text" id="inputSearch" placeholder="buscar frase" ng-model="query.inputSearch" ng-change="filter.printAutocomplete(query.inputSearch)" ng-blur="filter.onSearchBlur()" ng-enter="filter.doSearch()"/>&nbsp;&nbsp;
+              <input type="text" id="inputSearch" placeholder="buscar frase" ng-model="query.inputSearch" ng-change="filter.printAutocomplete(query.inputSearch)" ng-blur="filter.onSearchBlur()" ng-enter="filter.doSearch()" />&nbsp;&nbsp;
             </label>
 
-            <a class="clear-input" ng-click="filter.clearInput()" ng-show="query.inputSearch"><i class="icon ion-close"></i></a>
+            <a class="clear-input" ng-click="filter.clearInput()" ng-class="{'ng-hide': !query.inputSearch}"><i class="icon ion-close"></i></a>
 
           <p>Filtrar por:</p>
 
@@ -62,12 +64,13 @@
             </a>
           </div>
 
+          
           <div class="buttons">
             <button class="button button-green button-block" ng-click="filter.doSearch()" type="submit">Buscar</button>
           </div>
         </form>
 
-        <div class="search-backdrop" ng-show="filter.showFullSearch" ng-click="filter.showForm(false)"></div>
+        <div class="search-backdrop" ng-class="{'ng-hide': !filter.showFullSearch}" ng-click="filter.showForm(false)"></div>
 
       </div>
 
@@ -76,16 +79,16 @@
           <div class="home" style="height:100%">
             <div class="homeSI-map-holder" id="homeSI-map-holder" data-tap-disabled="true">
               <leaflet class="leaflet-map" id="leafletHomeSI" defaults="homeSI.leaflet.defaults" markers="homeSI.leaflet.markers" center="homeSI.leaflet.center" width="100%" height="100%" layers="homeSI.leaflet.layers"></leaflet>
-              <button class="geolocate-btn map-btn" type="button" ng-click="flow.geolocate()" ng-hide="nav.map.translate">
+              <button class="geolocate-btn map-btn" type="button" ng-click="flow.geolocate()" ng-class="{'ng-hide': nav.map.translate}">
                 <i class="icon" ng-class="{'ion-pinpoint': !flow.geolocateLoading, 'fa fa-refresh': flow.geolocateLoading}"></i>
               </button>
-              <button class="fitbounds-btn map-btn" type="button" ng-click="flow.fitBounds()" ng-hide="nav.map.translate">
+              <button class="fitbounds-btn map-btn" type="button" ng-click="flow.fitBounds()" ng-class="{'ng-hide': nav.map.translate}">
                 <i class="icon ion-qr-scanner" ></i>
               </button>
             </div>
           </div>
-          <div class="update-loading ng-hide" ng-show="flow.showUpdateLoading"><div class="licon"></div></div>
-          <div class="geosearch-msg" ng-show="flow.geoSearchMsg">{{flow.geoSearchMsg}}</div>
+          <div class="update-loading" ng-class="{'ng-hide': !flow.showUpdateLoading}"><div class="licon"></div></div>
+          <div class="geosearch-msg" ng-class="{'ng-hide': !flow.geoSearchMsg}">{{flow.geoSearchMsg}}</div>
         </div>
         <div class="dateos-roll">
           <ion-content scroll="true" delegate-handle="mainDateoRoll">
@@ -101,27 +104,27 @@
                 <dateo-teaser></dateo-teaser>
               </a>
             </div>
-            <div class="load-more" ng-show="query.result.length > flow.showRollNumResults">
+            <div class="load-more" ng-class="{'ng-hide': query.result.length <= flow.showRollNumResults}">
               <button class="button button-outline button-stable" ng-click="flow.showMoreRollResults()">
                 Ver más resultados
               </button>
             </div>
           </ion-content>
         </div>
-        <div class="no-results" ng-show="homeSI.noResults"><div>Sin resultados &nbsp;<i class="fa fa-meh-o"></i><br>Intenta de nuevo!</div></div>
-        <div class="no-results" ng-show="flow.geolocateError"><div>Error al ubicar &nbsp;<i class="fa fa-meh-o"></i><br>Revisa tu GPS!</div></div>
+        <div class="no-results" ng-class="{'ng-hide': !homeSI.noResults}"><div>Sin resultados &nbsp;<i class="fa fa-meh-o"></i><br>Intenta de nuevo!</div></div>
+        <div class="no-results" ng-class="{'ng-hide': !flow.geolocateError}"><div>Error al ubicar &nbsp;<i class="fa fa-meh-o"></i><br>Revisa tu GPS!</div></div>
       </div>
 
       <div ui-view="dateo" class="dateo-view"></div>
       <div ui-view="pages" class="pages-view"></div>
       <div ui-view="intro" class="intro-view"></div>
 
-      <a class="button button-datear" ui-sref="home.datear" ng-show="flow.showDatearBtn && !nav.datear.editDateo">
+      <a class="button button-datear" ui-sref="home.datear" ng-class="{'ng-hide': !flow.showDatearBtn || nav.datear.editDateo}">
         <span>datear</span>
         <i class="icon-burbuja"></i>
       </a>
 
-      <a class="button button-datear edit" ui-sref="home.dateoEdit({dateoId: nav.state.params.dateoId})" ng-show="flow.showDatearBtn && nav.datear.editDateo">
+      <a class="button button-datear edit ng-hide" ui-sref="home.dateoEdit({dateoId: nav.state.params.dateoId})" ng-class="{'ng-hide': !nav.datear.editDateo}">
         <span>editar</span>
         <i class="icon ion-edit"></i>
       </a>
@@ -146,7 +149,7 @@
             </div>
           </div>
           <div class="row stats">
-            <div class="col stat stat-dateos" ng-show="user.dateo_count" ng-click="flow.showMyDateos()" menu-close>
+            <div class="col stat stat-dateos" ng-class="{'ng-hide': !user.dateo_count}" ng-click="flow.showMyDateos()" menu-close>
               <div class="stat-inner">
                 <i class="icon icon-burbuja stat-icon"></i>
                 <div class="stat-text">
@@ -155,7 +158,7 @@
                 </div>
               </div>
             </div>
-            <div class="col stat stat-comments" ng-show="user.comment_count" menu-close>
+            <div class="col stat stat-comments" ng-class="{'ng-hide': !user.comment_count}" menu-close>
               <div class="stat-inner">
                 <i class="fa fa-comment-o stat-icon"></i>
                 <div class="stat-text">
@@ -164,7 +167,7 @@
                 </div>
               </div>
             </div>
-            <div class="col stat stat-votes" ng-show="user.voted_count" menu-close>
+            <div class="col stat stat-votes" ng-class="{'ng-hide': !user.voted_count}" menu-close>
               <div class="stat-inner">
                 <i class="fa fa-thumbs-o-up stat-icon"></i>
                 <div class="stat-text">

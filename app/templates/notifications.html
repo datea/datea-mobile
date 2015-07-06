@@ -1,17 +1,17 @@
-<div class="page invisible" ng-class="{invisible: !flow.showPage}" ng-hide="flow.hidePage">
+<div class="page invisible" ng-class="{invisible: !flow.showPage, 'ng-hide': flow.hidePage}">
 	<ion-content class="notifications-content">
 
 		<div class="notifications">
-			<!-- <h4 ng-show="notifications.result.length">Notificaciones</h4> -->
+			<!-- <h4>Notificaciones</h4> -->
 			<div class="list notification-list">
 			    <a ng-repeat="notf in notifications.result track by notf.id" class="item item-avatar" href="#{{::notf.url}}">
 			      <img class="border50" ng-src="{{::notf.actor_img | userImg}}" />
 				  <div class="title">{{::notf.title}}</div>
 			      <p class="extract">{{::notf.data.extract}}</p>
-			      <div ng-show="notf.unread" class="is-new"></div>
+			      <div ng-class="{'ng-hide': !notf.unread}" class="is-new"></div>
 			    </a>
 			</div>
-			<div class="load-more" ng-show="notifications.result.length < notifications.total">
+			<div class="load-more" ng-class="{'ng-hide': notifications.result.length >= notifications.total}">
 				<button class="button button-outline button-stable" ng-click="flow.moreNotifications()">
 				  Ver más resultados
 				</button>

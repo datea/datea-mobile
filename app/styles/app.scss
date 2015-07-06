@@ -22,6 +22,7 @@ $gray-dark-bg : #5E6E65;
 $gray-light-1 : #E8ECEA;
 $gray-light-2 : #B1BCB6;
 $gray-light-3 : #B4BEB9;
+$header-bg    : #bfc8c4;
 
 /* visualization colors */
 
@@ -336,7 +337,7 @@ textarea {
   @include hw-accelerate;
 
   z-index: 2001;
-  background-color: lighten($gray-dark-bg, 25%); //$yellow;
+  background-color: $header-bg; //$yellow;
   text-align: center;
   color: $yellow;
 
@@ -349,7 +350,7 @@ textarea {
       position: absolute;
       top: -7px;
       left: -37px;
-      color: white;
+      color: black;
       opacity: 0.8;
       font-size: 42px;
     }
@@ -368,10 +369,10 @@ textarea {
     padding-left: 10px;
     line-height: 44px;
     padding-right: 15px;
-    border-right: 1px solid black;
+    //border-right: 1px solid black;
     text-transform: uppercase;
     text-align: center;
-    color: white;
+    color: black;
 
     .back-icon {
       margin-right: 1px;
@@ -385,6 +386,7 @@ textarea {
       line-height: 44px;
     }
   }
+
   .bar-title {
     //-webkit-transition: transform 200ms ease-in-out;
     //transition: transform 200ms ease-in-out;
@@ -399,7 +401,7 @@ textarea {
     padding: 0;
     font-size: 18px;
     line-height: 44px;
-    color: white;
+    color: black;
 
     .title-icon {
       font-size: 32px;
@@ -413,7 +415,7 @@ textarea {
   }
   .main-menu {
     .button {
-      color: white;
+      color: black;
       margin-right: 6px;
     }
     .button.first {
@@ -1445,7 +1447,7 @@ ion-nav-view.main-ion-view {
   }
 
   .map-edit-form {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
@@ -1453,8 +1455,10 @@ ion-nav-view.main-ion-view {
     padding: 10px 10px 0 10px;
     background-color: white;
     p { margin-bottom: 0}
-    button {
+    button.button {
       border: 1px solid #b5b5b5;
+      font-size: 0.95em;
+      line-height: 47px;
     }
   }
 
@@ -2007,7 +2011,7 @@ ion-nav-view.main-ion-view {
 ========================================================================== */
 .dateos-filter {
 
-  @include hw-accelerate;
+  //@include hw-accelerate;
 
   left: 0px;
   top: 44px;
@@ -2049,6 +2053,10 @@ ion-nav-view.main-ion-view {
         top: 14px;
         left: 15px;
       }
+    }
+    .current-search {
+      padding-right: 24px;
+      color: #777;
     }
   }
 
@@ -2219,15 +2227,24 @@ ion-nav-view.main-ion-view {
       .button-bar {
         margin-top: 8px;
         .button {
-          font-size: 15px;
-          line-height: 3;
+          font-size: 13px;
+          line-height: 15px;
           border-right: 1px solid #e5e5e5;
+          position: relative;
+          min-height: 47px;
+          padding-top: 15px;
 
-          i {
-            position: relative;
-            top: 0px;
-            right: -3px;
+          i:before {
+            position: absolute;
+            top: 8px;
+            left: 42%;
             color: #777;
+            height: 12px;
+            line-height: 12px;
+          }
+
+          i.ion-plus:before {
+            font-size: 17px;
           }
 
           &.button-datea {
@@ -2237,8 +2254,8 @@ ion-nav-view.main-ion-view {
             }
             i:before {
               font-size: 18px;
-              position: relative;
-              top: 0px;
+              position: absolute;
+              top: 8px;
             }
           }
           &.button-unfollow {

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('dateaMobileApp')
-    .controller('DateoCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$ionicScrollDelegate', '$ionicSlideBoxDelegate', '$ionicPopup', 'config', 'User', 'Api', 'Find', 'leafletData', 'Nav', '$stateParams', '$ionicLoading', '$ionicBackdrop', 'Marker', 'Follow', '$window',
-        function( $scope, $rootScope, $http, $timeout, $ionicScrollDelegate, $ionicSlideBoxDelegate, $ionicPopup, config, User, Api, Find, leafletData, Nav, $stateParams, $ionicLoading, $ionicBackdrop, Marker, Follow, $window) {
+    .controller('DateoCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$ionicScrollDelegate', '$ionicSlideBoxDelegate', '$ionicPopup', 'config', 'User', 'Api', 'Find', 'leafletData', '$stateParams', '$ionicLoading', '$ionicBackdrop', 'Marker', 'Follow', '$window',
+        function( $scope, $rootScope, $http, $timeout, $ionicScrollDelegate, $ionicSlideBoxDelegate, $ionicPopup, config, User, Api, Find, leafletData, $stateParams, $ionicLoading, $ionicBackdrop, Marker, Follow, $window) {
 
             var initDateoView,
                 initSlideItem,
@@ -20,13 +20,13 @@ angular.module('dateaMobileApp')
             $scope.dateFormat = config.defaultDateFormat;
             $scope.listSliders = [];
 
-            Nav.header.setBackFunc(function () {
-                Nav.reduceMap(false);
+            $scope.nav.header.setBackFunc(function () {
+                $scope.nav.reduceMap(false);
                 $scope.flow.hideDateo = true;
-                Nav.datear.editDateo = false;
+                $scope.nav.datear.editDateo = false;
                 $timeout(function () {
                     $rootScope.$broadcast('map:showDateos');
-                    Nav.state.go('^');
+                    $scope.nav.state.go('^');
                 }, 320);
             });
 
@@ -108,27 +108,29 @@ angular.module('dateaMobileApp')
                         initDateoView(response);
                     }, function (error) {
                         $ionicLoading.hide();
-                        Nav.alert.checkConnection();
-                        Nav.header.goBack();
+                        $scope.nav.alert.checkConnection();
+                        $scope.nav.header.goBack();
                     });
                     return;
                 }
 
+                $scope.nav.reduceMap(true);
+                $scope.nav.header.showBackBtn = true;
+
                 $scope.listSliders.push( found.dateo );
                 firstSlide = true;
                 initSlideItem(found.dateo);
-                $timeout(updateSlideBox);
-                Nav.header.showBackBtn = true;
+                $scope.$applyAsync(updateSlideBox);
 
                 // if dateo is new don't slide up animate
-                if (Nav.datear.newDateoId && dateo.id === Nav.datear.newDateoId) {
-                    $scope.flow.showDateo = true;
-                    $ionicLoading.hide();
-                    Nav.reduceMap(true);
-                } else {
-                    $timeout(function () {
+                if ($scope.nav.datear.newDateoId && dateo.id === $scope.nav.datear.newDateoId) {
+                    $scope.$applyAsync(function () {
                         $scope.flow.showDateo = true;
-                        Nav.reduceMap(true);
+                    });
+                    $ionicLoading.hide();
+                } else {
+                    $scope.$applyAsync(function () {
+                        $scope.flow.showDateo = true;
                     });
                 }
 
@@ -147,7 +149,6 @@ angular.module('dateaMobileApp')
                       }
                     }
                     $scope.listSliders = $scope.listSliders.concat(results);
-                    $scope.flow.showDateo = true;
                     updateSlideBox();
                 }, 800);
             };
@@ -156,20 +157,20 @@ angular.module('dateaMobileApp')
                 $ionicScrollDelegate.scrollTop(false);
                 activeDateo = dateo;
 
-                if (Nav.datear.newDateoId && dateo.id === Nav.datear.newDateoId) {
+                if ($scope.nav.datear.newDateoId && dateo.id === $scope.nav.datear.newDateoId) {
                     dateo.isNew = true;
                     $scope.flow.daterito = parseInt(Math.round(Math.random()));
-                    Nav.datear.newDateoId = null;
+                    $scope.nav.datear.newDateoId = null;
                 }
 
                 $scope.flow.isFollowing = Follow.isFollowingDateo(dateo);
-                Nav.datear.editDateo = User.data.id === activeDateo.user.id ? activeDateo : null;
+                $scope.nav.datear.editDateo = User.data.id === activeDateo.user.id ? activeDateo : null;
 
                 hasUserVoted(dateo);
                 if (firstSlide) {
-                    $timeout(function () {
+                    $scope.$evalAsync(function () {
                         setMapView(dateo);
-                    }, 10);
+                    });
                     firstSlide = false;
                 }else{
                     setMapView(dateo);
@@ -207,7 +208,7 @@ angular.module('dateaMobileApp')
                 document.getElementById('comment-input').blur();
 
                 Api.comment.postCommentByDateoId( comment ).then( function ( response ) {
-                    Nav.header.noButtons = false;
+                    $scope.nav.header.noButtons = false;
                     $rootScope.$broadcast('datearBtn:show');
                     updateComments( response );
                     $ionicLoading.hide();
@@ -220,8 +221,8 @@ angular.module('dateaMobileApp')
                     }
                 }, function (reason) {
                     $ionicLoading.hide();
-                    Nav.alert.checkConnection();
-                    Nav.header.noButtons = false;
+                    $scope.nav.alert.checkConnection();
+                    $scope.nav.header.noButtons = false;
                     $rootScope.$broadcast('datearBtn:show');
                 });
             };
@@ -243,7 +244,7 @@ angular.module('dateaMobileApp')
                         activeDateo.hasVoted = false;
                         $scope.flow.voteLoading = false;
                     }, function ( reason ) {
-                        Nav.alert.checkConnection();
+                        $scope.nav.alert.checkConnection();
                         $scope.flow.voteLoading = false;
                         console.log( reason );
                     });
@@ -257,7 +258,7 @@ angular.module('dateaMobileApp')
                         $scope.flow.voteLoading = false;
 
                     }, function ( reason ) {
-                        Nav.alert.checkConnection();
+                        $scope.nav.alert.checkConnection();
                         $scope.flow.voteLoading = false;
                         console.log( reason );
                     });
@@ -265,8 +266,8 @@ angular.module('dateaMobileApp')
             };
 
             $scope.flow.openFollowTag = function (tagObj) {
-                Nav.follow.tag = tagObj;
-                Nav.state.go('home.dateo.followTag', {dateoId: activeDateo.id});
+                $scope.nav.follow.tag = tagObj;
+                $scope.nav.state.go('home.dateo.followTag', {dateoId: activeDateo.id});
             };
 
             $scope.flow.slideHasChanged = function ( index ) {
@@ -275,15 +276,15 @@ angular.module('dateaMobileApp')
             };
 
             $scope.flow.closeDateo = function () {
-                Nav.header.goBack();
+                $scope.nav.header.goBack();
             };
 
             $scope.flow.openEditComment = function () {
-                Nav.header.noButtons = true;
+                $scope.nav.header.noButtons = true;
                 $scope.flow.commentInput = '';
                 $scope.flow.editingComment = true;
-                console.log('stateData before', Nav.header.stateData);
-                Nav.header.stateData.title = "Comentar";
+                console.log('stateData before', $scope.nav.header.stateData);
+                $scope.nav.header.stateData.title = "Comentar";
                 $timeout(function () {
                     document.getElementById('comment-input').focus();
                     try { cordova.plugins.Keyboard.show(); } catch(err) {}
@@ -294,9 +295,9 @@ angular.module('dateaMobileApp')
             $scope.flow.closeEditComment = function () {
                 try { cordova.plugins.Keyboard.close(); } catch(err) {}
                 $scope.flow.editingComment = false;
-                Nav.header.noButtons = false;
+                $scope.nav.header.noButtons = false;
                 $rootScope.$broadcast('datearBtn:show');
-                 Nav.header.stateData.title = null;
+                 $scope.nav.header.stateData.title = null;
             };
 
             $scope.flow.openShare = function( dateo ) {
@@ -336,7 +337,7 @@ angular.module('dateaMobileApp')
 
             $scope.$on('keyboard:hide', function () {
                 $scope.flow.editingComment = false;
-                Nav.header.noButtons = false;
+                $scope.nav.header.noButtons = false;
             });
 
             initDateoView();

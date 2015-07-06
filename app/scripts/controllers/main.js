@@ -297,9 +297,7 @@ angular.module('dateaMobileApp')
                 window.removeEventListener('native.keyboardshow', kbShowEvent);
                 window.removeEventListener('native.keyboardhide', kbHideEvent);
             } catch(err) {}
-            try {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            } catch(err) {}
+
             window.addEventListener('native.keyboardshow', kbShowEvent);
             window.addEventListener('native.keyboardhide', kbHideEvent);
         }

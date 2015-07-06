@@ -1,5 +1,5 @@
 <ion-view>
-  <ion-header-bar align-title="left" class="bar bar-front" ng-controller="HeaderCtrl" ng-show="header.visible">
+  <ion-header-bar align-title="left" class="bar bar-front" ng-controller="HeaderCtrl" ng-class="{'ng-hide': !header.visible}">
       <div class="buttons">
           <span><img src="images/logo-datea.png" alt="Logo Datea" height="32"> </span>
       </div>
