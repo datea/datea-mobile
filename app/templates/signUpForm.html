@@ -13,28 +13,31 @@
 			<div class="limiter">
 				<form name="signup_form" ng-submit="signup.save()" novalidate>
 					<div class="list">
-						<label class="item item-input" ng-class="{ 'error-field': signup_form.username.$error.required }">
-							<input type="text" name="username" placeholder="Nombre de usuario" ng-pattern="/^[A-Za-z0-9]{2,15}$/" ng-model="signup.bio" required>
+						<label class="item item-input" ng-class="{ 'error-field': signup_form.username.$error.required && signup.unameFocused, 'success-field': signup_form.username.$valid }">
+							<input type="text" name="username" placeholder="Nombre de usuario" ng-pattern="/^[A-Za-z0-9]{2,24}$/" ng-model="signup.bio" required ng-focus="signup.unameFocused = true">
 						</label>
+						<div class="sub">De 2 a 24 caractéres, sin espacios.</div>
 
-						<label class="item item-input" ng-class="{ 'error-field': signup_form.email.$error.required, 'error-field': signup_form.email.$error.email  }">
+						<label class="item item-input" ng-class="{ 'error-field': signup_form.email.$error.email, 'success-field': signup_form.email.$valid}">
 							<input type="email" name="email" placeholder="Correo electrónico" ng-model="signup.email" required>
 						</label>
 
-						<label class="item item-input" ng-class="{ 'error-field': signup_form.password.$error.required }">
-							<input type="password" name="password" placeholder="Contraseña" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?!.*\s).{6,32}$/" ng-model="signup.password" required>
+						<label class="item item-input" ng-class="{ 'error-field': signup_form.password.$invalid && signup.pwFocused, 'success-field': signup_form.password.$valid }">
+							<input type="password" name="password" placeholder="Contraseña" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?!.*\s).{6,32}$/" ng-model="signup.password" required ng-focus="signup.pwFocused = true" />
 						</label>
+						<div class="sub">Mínimo 6 caracteres, al menos 1 número.</div>
 
-						<label class="item item-input">
-							<input type="password" name="password2" placeholder="Reingresar contraseña" ng-model="signup.samePassword" password-match="signup.password" required>
+						<label class="item item-input" ng-class="{'success-field': signup.passConfirm, 'error-field': signup.passConfirm == false }">
+							<input type="password" name="password2" placeholder="Reingresar contraseña" ng-model="signup.samePassword" password-match="signup.password" required ng-keyUp="signup.confirmPassKey($event)">
 						</label>
+						<div class="sub" ng-class="{'success-sub': signup.passConfirm, 'error-sub': signup.passConfirm == false }" ng-show="signup.passConfirmMsg">{{signup.passConfirmMsg}}</div>
 					</div>
 
 					<div class="options">
 						<div class="row">
 							<div class="col col-25"></div>
 							<div class="col col-50">
-								<button class="button button-block button-positive icon-right ion-checkmark" type="submit" ng-disabled="signup_form.$invalid">Crear</button>
+								<button class="button button-block button-balanced icon-right ion-checkmark" type="submit" ng-disabled="signup_form.$invalid">Crear</button>
 							</div>
 							<div class="col col-25"></div>
 						</div>

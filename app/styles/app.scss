@@ -784,6 +784,20 @@ ion-nav-view.main-ion-view {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1) inset;
   padding: 15px 0;
 
+  .sub {
+    text-align: center;
+    position: relative;
+    top: -8px;
+    padding-bottom: 5px;
+    font-size: 0.9em;
+  }
+  .error-sub {
+    color: #ff0000;
+  }
+  .success-sub {
+    color: #000000;
+  }
+
   p {
     padding-top: 15px;
 
@@ -802,10 +816,24 @@ ion-nav-view.main-ion-view {
     border: 0px none;
     margin-bottom: 10px;
     padding: 3px 10px;
+    padding-top: 10px;
     @extend .align-center;
+    podition: relative;
 
     &.error-field {
       box-shadow: 0 0 2px rgb(255, 0, 0) inset;
+    }
+    &.success-field {
+      box-shadow: 0 0 4px rgb(0, 150, 0);
+      &:after {
+        content: "\f122";
+        font-family: "Ionicons";
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        font-size: 22px;
+        color: $green;
+      }
     }
 
     &:active, &:hover, &:focus  {
@@ -898,8 +926,8 @@ ion-nav-view.main-ion-view {
 
     @include hw-accelerate;
 
-    //-webkit-transition: transform 300ms ease-in-out;
-    //transition: transform 300ms ease-in-out;
+    -webkit-transition: transform 300ms ease-in-out;
+    transition: transform 300ms ease-in-out;
 
     &.edit {
       -webkit-transition: none;
@@ -907,8 +935,8 @@ ion-nav-view.main-ion-view {
     }
 
     &.ng-hide, &.invisible {
-      //-webkit-transform: translateY(100%);
-      //transform: translateY(100%);
+      -webkit-transform: translateY(100%);
+      transform: translateY(100%);
     }
 
     .map-transparent {
@@ -1759,8 +1787,8 @@ ion-nav-view.main-ion-view {
 
     @include hw-accelerate;
 
-    //-webkit-transition: transform 180ms ease-in-out;
-    //transition: transform 180ms ease-in-out;
+    -webkit-transition: transform 180ms ease-in-out;
+    transition: transform 180ms ease-in-out;
 
     &.translated {
       -webkit-transform: translate(0, -30%) !important;
@@ -2011,7 +2039,7 @@ ion-nav-view.main-ion-view {
 ========================================================================== */
 .dateos-filter {
 
-  //@include hw-accelerate;
+  @include hw-accelerate;
 
   left: 0px;
   top: 44px;
@@ -2349,7 +2377,7 @@ ion-nav-view.main-ion-view {
 .tag-view2 {
   .welcome {
     position: relative;
-    background-color: $gray-light-1;
+    background-color: white; //$gray-light-1;
     padding: 9px 16px 9px 65px;
     min-height: 59px;
     img {

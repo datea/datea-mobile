@@ -281,6 +281,7 @@ angular.module('dateaMobileApp')
             if ( $scope.flow.isSignedIn) {
               //$ionicPlatform.ready(function () {
                 onSignIn();
+                console.log('on sign in');
               //});
             }
 

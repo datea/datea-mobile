@@ -15,13 +15,13 @@ function ($scope, Nav, $timeout) {
 	$scope.$on('home:loaded', function () {
 		$timeout(function () {
 			$scope.intro.showIntro = true;
-		}, 800);
+		}, 1200);
 	});
 
 	if ($scope.flow.homeLoaded) {
 		$timeout(function () {
 			$scope.intro.showIntro = true;
-		}, 800);
+		}, 1200);
 	}
 
 	$scope.intro.close = function () {

@@ -142,10 +142,11 @@ angular.module('dateaMobileApp')
                     encodingType: Camera.EncodingType.JPEG,
                     targetWidth: 1024,
                     targetHeight: 1024,
-                    allowEdit: true,
+                    //allowEdit: true,
                     saveToPhotoAlbum: true,
                     sourceType: Camera.PictureSourceType[source],
-                    destinationType: Camera.DestinationType.DATA_URL
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    correctOrientation: 1
                 });
             };
 
@@ -332,7 +333,7 @@ angular.module('dateaMobileApp')
                         return t.tag === tag;
                     });
 
-                    console.log('ftags', ftags);
+                    //console.log('ftags', ftags);
 
                     var suggested2 = [];
 

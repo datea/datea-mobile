@@ -21,6 +21,12 @@ angular.module('dateaMobileApp')
                 $ionicLoading.hide();
             };
 
+            $scope.signup.confirmPassKey = function ($event) {
+              $scope.signup.passConfirm = $scope.signup.samePassword == $scope.signup.password;
+              console.log($scope.signup.passConfirm, $scope.signup.samePassword, $scope.signup.password);
+              $scope.signup.passConfirmMsg = $scope.signup.passConfirm ? 'Las contraseñas coinciden.' : 'Las contraseñas aún no coinciden.';
+            };
+
             $scope.signup.save = function() {
               var data, isValid;
 

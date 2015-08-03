@@ -40,11 +40,11 @@ angular
                     osm: {
                         name: 'OpenStreetMap',
                         type: 'xyz',
-                        url : 'http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png',//'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+                        url : 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', //'http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png',
                         layerOptions: {
-                            //subdomains: ['otile1','otile2','otile3','otile4'],
-                            //attribution: 'Tiles by <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-                            attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                            subdomains: ['otile1','otile2','otile3','otile4'],
+                            attribution: 'Tiles by <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                            //attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                             continuousWorld: true
                         }
                         /*url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",

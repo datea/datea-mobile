@@ -20,8 +20,7 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
             cordova.plugins.Keyboard.disableScroll(true);
         });
 
-        //if(ionic.Platform.isAndroid())
-        $ionicConfigProvider.scrolling.jsScrolling(false);
+        if(ionic.Platform.isAndroid()) $ionicConfigProvider.scrolling.jsScrolling(false);
 
         $stateProvider
 
@@ -253,6 +252,7 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
 
         .state('home.hello', {
             url : '/hello',
+            cache: false,
             views : {
                 'dateo' : {
                     templateUrl : 'templates/tags.html',

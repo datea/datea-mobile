@@ -45,7 +45,6 @@ angular.module('dateaMobileApp')
                   t.isFollowing = Follow.isFollowingTag(t);
                   return t;
               });
-              console.log('trending response', $scope.tags.trending);
               Campaign.trendingTags = response.objects;
               Campaign.loadCampaigns();
           } );
@@ -95,7 +94,6 @@ angular.module('dateaMobileApp')
           $scope.flow.campaigns = Campaign.result.filter(function (c) { return parseInt(tagId.substr(1)) === c.main_tag.id; });
           $scope.flow.buttonsShown = tagId;
           $scope.flow.isGray = tagId;
-          console.log("Campaigns to render", $scope.flow.campaigns);
         }
       };
 

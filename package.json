@@ -1,7 +1,7 @@
 {
   "name": "datea_mobile",
   "version": "1.0.0",
-  "author": "Datea <contacto@datea.pe>",
+  "author": "Rodrigo Derteano <rodrigo@datea.pe>",
   "description": "",
   "dependencies": {},
   "devDependencies": {
@@ -13,6 +13,7 @@
     "gulp": "^3.8.10",
     "gulp-angular-templatecache": "^1.5.0",
     "gulp-autoprefixer": "^2.1.0",
+    "gulp-cached": "^1.1.0",
     "gulp-changed": "^1.1.1",
     "gulp-concat": "^2.4.3",
     "gulp-iconfont": "^1.0.0",
@@ -23,6 +24,7 @@
     "gulp-livereload": "^3.7.0",
     "gulp-load-plugins": "^0.8.0",
     "gulp-ng-annotate": "^0.5.0",
+    "gulp-remember": "^0.3.0",
     "gulp-rev": "^3.0.0",
     "gulp-sass": "^2.0.1",
     "gulp-shell": "^0.2.11",
@@ -44,5 +46,23 @@
   },
   "scripts": {
     "gulp": "./node_modules/.bin/gulp"
-  }
+  },
+  "cordovaPlugins": [
+    "com.ionic.keyboard",
+    {
+      "locator": "https://github.com/oauth-io/oauth-phonegap",
+      "id": "com.oauthio.plugins.oauthio"
+    },
+    "cordova-plugin-device",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-whitelist",
+    "nl.x-services.plugins.socialsharing",
+    "org.apache.cordova.camera",
+    "org.apache.cordova.geolocation",
+    "org.apache.cordova.inappbrowser"
+  ],
+  "cordovaPlatforms": [
+    "ios",
+    "android"
+  ]
 }
