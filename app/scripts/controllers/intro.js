@@ -12,6 +12,8 @@ function ($scope, Nav, $timeout) {
 		Nav.state.go('home.hello');
 	});
 
+	console.log('hey intro');
+
 	$scope.$on('home:loaded', function () {
 		$timeout(function () {
 			$scope.intro.showIntro = true;

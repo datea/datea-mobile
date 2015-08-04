@@ -1,20 +1,21 @@
 'use strict';
 
-angular.module('dateaMobileApp').controller('AccountCtrl', ['$scope', '$location', '$ionicLoading', '$ionicPopup', 'User', 'config', 'Api', 'Nav', '$timeout', '$rootScope',
-    function($scope, $location, $ionicLoading, $ionicPopup, User, config, Api, Nav, $timeout, $rootScope) {
+angular.module('dateaMobileApp').controller('AccountCtrl', ['$scope', '$location', '$ionicLoading', '$ionicPopup', 'User', 'config', 'Api', 'Nav', '$timeout', '$rootScope', '$state',
+    function($scope, $location, $ionicLoading, $ionicPopup, User, config, Api, Nav, $timeout, $rootScope, $state) {
 
         $scope.account = User.data;
         $scope.flow = {};
         $scope.flow.isNewUser = User.isNew();
+        console.log('user new', $scope.flow.isNewUser);
+        console.log('user status', User.data.status);
         $scope.flow.showEditPage = true;
-
 
         if (Nav.state.current.name !== 'accountInit') {
             Nav.header.setBackFunc(function () {
               $scope.flow.showEditPage = false;
               Nav.pages.show = false;
               Nav.reduceMap(false);
-              $timeout(function () { Nav.state.go('home');}, 180);
+              $timeout(function () { $state.go('home');}, 180);
             });
         }
 
@@ -105,12 +106,29 @@ angular.module('dateaMobileApp').controller('AccountCtrl', ['$scope', '$location
 
             User.updateUser(data)
             .then(function(response) {
-                console.log(response);
+                console.log('update user response', response);
                 /* Close Loading */
                 $scope.loadingHide();
 
                 if (Nav.state.current.name === 'accountInit') {
-                    Nav.state.go('home.intro');
+                    if  (!!response.email && response.status === 0) {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Falta un último paso:',
+                            template: 'Debes validar tu correo. Sigue las instrucciones que te acabamos de enviar y luego pulsa aquí para seguir.',
+                            okText: 'Seguir',
+                            okType: 'button-balanced'
+
+                        });
+                        alertPopup.then(function(res) {
+                            $scope.loadingShow();
+                            User.updateUserDataFromApi(function () {
+                                $state.go('home.intro');
+                                $scope.loadingHide();
+                            });
+                        });
+                    }else{
+                        $state.go('home.intro');
+                    }
                 } else {
                     Nav.header.goBack();
                 }

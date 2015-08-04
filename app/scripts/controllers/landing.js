@@ -28,7 +28,7 @@ function(
 
           User.signInBy3rdParty(partyGivens)
           .then(function(response) {
-              $timeout(function() {
+              //$timeout(function() {
                   /* Close Loading */
                   $ionicLoading.hide();
                   console.log(ls.get('is_new'));
@@ -39,7 +39,7 @@ function(
                       //console.log('go home!');
                       Nav.state.go('home');
                   }
-              }, 1000);
+              //}, 1000);
 
           }, function (reason) {
               console.log('$scope.flow.withFacebook', reason);
@@ -69,18 +69,15 @@ function(
           User.signInBy3rdParty(partyGivens)
           .then(function(response) {
 
-              $timeout(function() {
-                  /* Close Loading */
-                  $ionicLoading.hide();
-
-                  //console.log( 'mia riposta', ls.get('is_new') );
-                  /* the User is new  */
-                  if (ls.get('is_new') === true) {
-                      Nav.state.go('accountInit');
-                  } else {
-                      Nav.state.go('home');
-                  } // */
-              }, 1000);
+              //$timeout(function() {
+              $ionicLoading.hide();
+              /* the User is new  */
+              if (ls.get('is_new') === true) {
+                  Nav.state.go('accountInit');
+              } else {
+                  Nav.state.go('home');
+              }
+              //});
 
           }, function(reason) {
               console.log('$scope.flow.withTwitter', reason);

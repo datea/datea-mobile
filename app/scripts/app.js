@@ -30,7 +30,6 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
             controller: 'LandingCtrl'
         })
 
-        // setup an abstract state Home
         .state('home', {
             url: '/home',
             templateUrl: 'templates/main.html',
@@ -60,21 +59,18 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
             } ]
         })
 
-        // setup an abstract state SignIn
         .state('signIn', {
             url: '/signin',
             templateUrl: 'templates/signIn.html',
             controller: 'SignInCtrl'
         })
 
-        // setup an abstract state SignUp
         .state('signUp', {
             url: '/signup',
             templateUrl: 'templates/landing.html',
             controller: 'SignUpCtrl'
         })
 
-        // setup an abstract state SignUp
         .state('home.notifications', {
             url: '/notifications',
             data: {
@@ -89,7 +85,6 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
             }
         })
 
-        // setup an abstract state SignUp
         .state('home.account', {
             url: '/account',
             data: {
@@ -127,40 +122,33 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
             }
         })
 
-        // setup an abstract state SignUp by form
         .state('signUpForm', {
             url: '/signup-form',
             templateUrl: 'templates/signUpForm.html',
             controller: 'SignUpFormCtrl'
         })
 
-        // setup an abstract state Activate Register
         .state('activateRegister', {
             url: '/activate-register',
             templateUrl: 'templates/activate.html'
         })
 
-        // setup an abstract state Login
         .state('login', {
             url: '/login',
             templateUrl: 'templates/main.html'
             //controller: 'SignUpCtrl'
         })
 
-        // setup an abstract state Forget Password
         .state('forgetPass', {
             url: '/forget-pass',
             templateUrl: 'templates/forgetPass.html',
             controller: 'SignInCtrl'
         })
 
-        // setup an abstract state Confirm Password
         .state('confirmPass', {
             url: '/confirm-pass',
             templateUrl: 'templates/confirmPass.html'
         })
-
-        // setup an abstract state Tags
 
         .state('home.campaigns', {
             url: '/campaigns',
@@ -195,7 +183,6 @@ angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.route
                 }
             }
         })
-
 
         .state('home.datear', {
             url : '/datear',
