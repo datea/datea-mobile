@@ -1274,13 +1274,13 @@ ion-nav-view.main-ion-view {
       }
 
       .inner {
-        padding: 10px 24px;
+        padding: 10px 10px;
 
         h4 { margin-top: 0; margin-bottom: 5px;}
-        p { margin-bottom: 0; font-size: 14px; margin-right: 70px}
+        p { margin-bottom: 0; font-size: 0.9em; line-height: 1.5em; margin-right: 70px}
 
         div.share {
-          width: 70px;
+          width: 60px;
           font-size: 14px;
           line-height: 47px;
           float: right;

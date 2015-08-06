@@ -7,6 +7,5 @@
     "bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js",
     "bower_components/angular-i18n/angular-locale_es-pe.js",
     "bower_components/angular-checklist-model/checklist-model.js",
-    "bower_components/ngCordova/dist/ng-cordova.js",
-    "bower_components/oauth-js/dist/oauth.js"
+    "bower_components/ngCordova/dist/ng-cordova.js"
 ]
