@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('dateaMobileApp')
-    .controller('DatearCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$ionicPopup', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', 'config', 'Api', 'Nav', 'leafletData', '$state', '$stateParams', 'User', 'Find', 'Follow', 'Marker', '$ionicLoading',
-        function( $scope, $rootScope, $http, $timeout, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate, config, Api, Nav, leafletData, $state, $stateParams, User, Find, Follow, Marker, $ionicLoading
+    .controller('DatearCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$ionicPopup', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', 'config', 'Api', 'Nav', 'leafletData', '$state', '$stateParams', 'User', 'Find', 'Follow', 'Marker', '$ionicLoading', '$ionicModal', 'localStorageService', '$cordovaFileTransfer',
+        function( $scope, $rootScope, $http, $timeout, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate, config, Api, Nav, leafletData, $state, $stateParams, User, Find, Follow, Marker, $ionicLoading, $ionicModal, localStorageService, $cordovaFileTransfer
 
             ) {
 
-            var imageAdded = false;
+            var imageAdded     = false;
+            var imageUploading = false;
+            var savingDateo    = false;
 
             $scope.datear = {};
             $scope.datear.object  = {};
@@ -127,10 +129,43 @@ angular.module('dateaMobileApp')
             /* Get Image */
             var getPicture = function(source) {
 
-                function onSuccess(imageData) {
-                    $scope.datear.form.ImgUrl = 'data:image/jpeg;base64,' + imageData;
-                    //console.log($scope.datear.form.ImgUrl);
-                    imageAdded = true;
+                function onSuccess(fileURI) {
+                    $scope.datear.form.ImgUrl = fileURI;
+
+                    imageUploading = true;
+
+                    var options = new FileUploadOptions();
+                    options.fileKey  = "image";
+                    options.fileName = _.last(fileURI.split('/')).replace(' ','_');
+                    var extension = _.last(options.fileName.split('.')).toLowerCase();
+                    if (extension == 'jpg' || extension == 'jpeg') {
+                        options.mimeType = 'image/jpeg';
+                    }else{
+                        options.mimeType = 'image/'+extension;
+                    }
+                    var params = { order: $scope.datear.mode === 'edit' && $scope.datear.object.images && $scope.datear.object.images.length > 1 ? $scope.datear.object.images.length - 1 : 0 };
+                    options.chunkedMode = false;
+                    options.headers = localStorageService.get('token');
+
+                    $cordovaFileTransfer.upload(config.api.imgUrl+"/image/save/", fileURI, options)
+                    .then(function (success) {
+                        var imgRsc = JSON.parse(success.response).resource;
+                        if ($scope.datear.mode === 'edit' && $scope.datear.object.images && $scope.datear.object.images.length > 1) {
+                            $scope.datear.object.images.push(imgRsc);
+                        }else{
+                            $scope.datear.object.images = [imgRsc];
+                        }
+                        console.log('datear object', $scope.datear.object);
+                        imageUploading = false;
+                        imageAdded = true;
+                        if (savingDateo) {
+                            savingDateo = false;
+                            $scope.datear.doDatear();
+                        }
+
+                    }, function (error) {
+                        console.log('upload error', error);
+                    });
                 }
 
                 function onFail(message) {
@@ -143,9 +178,9 @@ angular.module('dateaMobileApp')
                     targetWidth: 1024,
                     targetHeight: 1024,
                     //allowEdit: true,
-                    saveToPhotoAlbum: true,
+                    //saveToPhotoAlbum: true,
                     sourceType: Camera.PictureSourceType[source],
-                    destinationType: Camera.DestinationType.DATA_URL,
+                    destinationType: Camera.DestinationType.FILE_URI, //Camera.DestinationType.DATA_URL,
                     correctOrientation: 1
                 });
             };
@@ -259,25 +294,29 @@ angular.module('dateaMobileApp')
                 }
             };
 
-            $scope.datear.takeImage = function() {
+            $scope.datear.openImageModal = function() {
 
-                // A confirm dialog
-                var confirmPopup = $ionicPopup.confirm({
-                    title: 'Agregar imágen',
-                    //template: 'Datear con Imagen',
-                    cancelText: 'Elegir existente',
-                    cancelType: 'button-dark',
-                    okText: 'Tomar foto',
-                    okType: 'button-dark',
-                });
+                $ionicModal.fromTemplateUrl('templates/image-modal.html', {
+                    scope: $scope,
+                    animation: false
+                  }).then(function(modal) {
+                    $scope.imageModal = modal;
+                    modal.show();
+                  });
+            };
 
-                confirmPopup.then(function(res) {
-                    if (res) {
-                       getPicture('CAMERA');
-                    } else {
-                       getPicture('PHOTOLIBRARY');
-                    }
-                });
+            $scope.datear.takeImage = function () {
+                $scope.imageModal.remove();
+                getPicture('CAMERA');
+            };
+
+            $scope.datear.browseImage = function () {
+                $scope.imageModal.remove();
+                getPicture('PHOTOLIBRARY');
+            };
+
+            $scope.datear.closeImgModal = function () {
+                $scope.imageModal.remove();
             };
 
             $scope.datear.showAlert = function( message ) {
@@ -423,6 +462,7 @@ angular.module('dateaMobileApp')
                 });
                 $scope.datear.object.tags = tags;
 
+                /*
                 if ( $scope.datear.form.ImgUrl !== '' ) {
 
                     if ($scope.datear.mode === 'edit' && imageAdded) {
@@ -447,7 +487,7 @@ angular.module('dateaMobileApp')
                             order : 0
                         }];
                     }
-                }
+                }*/
 
                 if ( $scope.datear.object.tags.length === 0 ) {
 
@@ -455,6 +495,11 @@ angular.module('dateaMobileApp')
 
                 } else {
                     $ionicLoading.show(config.loadingTpl);
+                   
+                    if (imageUploading) {
+                        savingDateo = true;
+                        return;
+                    };
 
                     /****************** POST NEW DATEO *******************/
                     if ($scope.datear.mode === 'new') {
@@ -647,7 +692,7 @@ angular.module('dateaMobileApp')
             $scope.datear.editContent = function () {
                 $scope.datear.editingContent = true;
                 Nav.header.noButtons = true;
-                setTimeout(function () {
+                $timeout(function () {
                     var contentElem = document.getElementById('datear-contenido');
                     console.log('textarea focus', contentElem);
                     contentElem.focus();

@@ -4,12 +4,12 @@
 
     <ion-view class="home-view">
       <ion-header-bar align-title="left" class="bar bar-front" ng-controller="HeaderCtrl" ng-class="{'ng-hide': !header.visible}">
-          <div class="buttons logo" ng-class="{'ng-hide': header.showBackBtn || header.noButtons}" ng-click="header.toggleSideMenu()">
+          <button class="button button-icon logo" ng-class="{'ng-hide': header.showBackBtn || header.noButtons}" ng-click="header.toggleSideMenu()">
             <i class="icon ion-android-menu"></i>
               <span><img src="images/datea-logo-movil.png" alt="Logo Datea" height="32"> </span>
-          </div>
+          </button>
           <a class="back-btn" ng-click="header.goBack()" ng-class="{'ng-hide': !header.showBackBtn || header.noButtons}">
-            <i class="back-icon icon ion-ios-arrow-back" ng-class="{'ng-hide': header.stateData.backBtnLabel}"></i> <span class="back-label">{{header.stateData.backBtnLabel || header.backBtnLabel}}</span>
+            <i class="back-icon icon ion-arrow-left-c" ng-class="{'ng-hide': header.stateData.backBtnLabel}"></i> <span class="back-label">{{header.stateData.backBtnLabel || header.backBtnLabel}}</span>
           </a>
           <h1 class="bar-title" ng-class="{'ng-hide': !header.stateData.title}" ng-bind-html="header.stateData.title"></h1>
           <div class="buttons main-menu pull-right" ng-class="{'ng-hide': header.showBackBtn || header.noButtons}">
@@ -35,7 +35,7 @@
           <div class="current-search">{{query.inputSearch || filter.placeholder}}</div>
         </label>
 
-        <form class="full-search" novalidate role="form" name="form" ng-class="{'ng-hide': !filter.showFullSearch}">
+        <form class="full-search" novalidate role="form" name="form" ng-if="filter.showFullSearch">
 
           <div class="autocomplete" ng-class="{'ng-hide': !filter.showAutocomplete}">
                 <ion-scroll direction="y" scrollbar-y="true" delegate-handle="scrollComplete">
@@ -90,7 +90,7 @@
           <div class="update-loading" ng-class="{'ng-hide': !flow.showUpdateLoading}"><div class="licon"></div></div>
           <div class="geosearch-msg" ng-class="{'ng-hide': !flow.geoSearchMsg}">{{flow.geoSearchMsg}}</div>
         </div>
-        <div class="dateos-roll">
+        <div class="dateos-roll" ng-if="nav.vis.current == 'list'">
           <ion-content scroll="true" delegate-handle="mainDateoRoll">
             <ion-refresher
                 pulling-text="jala para refrescar..."

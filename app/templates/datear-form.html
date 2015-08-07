@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="content-input-wrap" ng-class="{'ng-hide': !datear.editingContent}" ng-style="datear.containerStyle">
+  <div class="content-input-wrap" ng-class="{'ng-hide': !datear.editingContent}">
     <div class="datear-contenido">
         <textarea id="datear-contenido" placeholder="ingresa el contenido" ng-model="datear.object.content" ng-minlength="3" required ></textarea>
     </div>
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="tag-input-wrap" ng-class="{'ng-hide': !datear.editingTags}" ng-style="datear.containerStyle">
+  <div class="tag-input-wrap" ng-class="{'ng-hide': !datear.editingTags}">
     <div class="tag-input-field">
         <input type="text" placeholder="Ingresa tu #etiqueta" id="datear-hashtags" ng-model="datear.form.nextTag" ng-change="datear.printAutocomplete(datear.form.nextTag)" ng-enter="datear.addTag(datear.form.nextTag)" />
         <button class="clear-search button button-clear button-light icon ion-close ng-hide" ng-click="datear.clearTagInput()" ng-class="{'ng-hide': !datear.form.nextTag}"></button>
@@ -74,7 +74,7 @@
 
         <div class="step step-2">
 
-            <button class="button button-camera" ng-click="datear.takeImage()" ng-class="{'ng-hide': !!datear.form.ImgUrl}">
+            <button class="button button-camera" ng-click="datear.openImageModal()" ng-class="{'ng-hide': !!datear.form.ImgUrl}">
               <i class="icon ion-camera"></i>
               <div>agrega una imagen <small>(opcional)</small></div>
             </button>

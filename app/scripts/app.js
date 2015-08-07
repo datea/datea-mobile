@@ -1,7 +1,7 @@
 'use strict';
 /* Ionic dateaMobileApp App */
 
-angular.module('dateaMobileApp', ['ionic', 'ngResource', 'ngSanitize', 'ui.router', 'LocalStorageModule', 'leaflet-directive', 'checklist-model'])
+angular.module('dateaMobileApp', ['ionic', 'ngCordova', 'ngResource', 'ngSanitize', 'ui.router', 'LocalStorageModule', 'leaflet-directive', 'checklist-model'])
 
 
 .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$ionicConfigProvider',

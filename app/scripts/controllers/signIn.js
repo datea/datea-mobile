@@ -46,7 +46,7 @@ angular.module('dateaMobileApp')
                             $scope.loadingHide();
 
                             User.updateUserDataFromStorage();
-                            $state.go('home');
+                            $state.go('home.hello');
 
                         }, function(response) {
 

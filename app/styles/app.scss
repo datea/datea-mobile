@@ -343,16 +343,19 @@ textarea {
 
   .logo {
     position: relative;
-    left: 5px;
+    left: 0px;
     top: 1px;
+    overflow: visible;
 
     .icon {
       position: absolute;
-      top: -7px;
-      left: -37px;
+      top: 1px;
+      left: -28px;
       color: black;
       opacity: 0.8;
-      font-size: 42px;
+      &:before {
+        font-size: 36px;
+      }
     }
   }
 
@@ -1703,6 +1706,40 @@ ion-nav-view.main-ion-view {
   height: auto;
 }
 
+.image-modal-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .bdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  background: rgba(0,0,0,0.7);
+  .image-modal {
+    background: white;
+    h3 { font-size: 18px; text-align: center;}
+    padding: 10px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45%;
+    .btns {
+      text-align: center;
+      .button {
+        line-height: 18px;
+        width: 112px;
+        font-size: 0.95em;
+        padding: 14px 0px;
+      }
+    }
+  }
+}
+
 
 
 /*==========================================================================
@@ -1775,6 +1812,13 @@ ion-nav-view.main-ion-view {
 /*=======================================================
   MAIN
 ======================================================== */
+
+.platform-ios .main-content .dateos-roll {
+  ion-content {
+    top: 66px;
+  }
+}
+
 .main-content {
   position: absolute;
   top: 44px;
