@@ -126,6 +126,11 @@ angular.module('dateaMobileApp')
                 });
             };
 
+            $scope.flow.autogrow = function() {
+                var element = document.getElementById("datear-contenido");
+                element.style.height =  element.scrollHeight + "px";
+            };
+
             /* Get Image */
             var getPicture = function(source) {
 

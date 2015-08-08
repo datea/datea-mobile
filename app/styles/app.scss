@@ -1548,61 +1548,6 @@ ion-nav-view.main-ion-view {
       }
     }
   }
-  .tag-input-wrap {
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #E8ECEA;
-    z-index: 3;
-    @include tag-input-form;
-
-    padding: 0 10px;
-
-    .tag-input-field {
-      padding-top: 8px;
-      .button-add.button {
-        top: 6px;
-      }
-    }
-
-    .back-action {
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-    }
-
-    .datear-autocomplete {
-      position: absolute;
-      top: 58px;
-      //bottom: 0;
-      right: 0;
-      left: 0;
-      background-color: #E8ECEA;
-      padding: 0 8px;
-
-      .tag-item {
-        position: relative;
-        z-index: 2;
-        @include button-tag;
-        //font-size: 16px;
-        //padding: 1px 5px;
-        //line-height: 34px;
-      }
-
-      vertical-align: baseline;
-      @include transition_set(opacity, 0.2s, ease-in);
-
-      &.visible {
-        z-index: 20;
-        opacity: 1 !important;
-      }
-    }
-  }
 }
 
 
@@ -1667,7 +1612,45 @@ ion-nav-view.main-ion-view {
     padding: 10px;
     margin-top: 10px;
     background-color: #E8ECEA;
-    @include tag-input-form;
+    .tag-input {
+      @include tag-input-form;
+
+      .back-action {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+      }
+
+      .datear-autocomplete {
+        position: absolute;
+        //bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: #E8ECEA;
+        padding: 0 8px;
+
+        .tag-item {
+          position: relative;
+          z-index: 2;
+          @include button-tag;
+          //font-size: 16px;
+          //padding: 1px 5px;
+          //line-height: 34px;
+        }
+
+        vertical-align: baseline;
+        @include transition_set(opacity, 0.2s, ease-in);
+
+        &.visible {
+          z-index: 20;
+          opacity: 1 !important;
+        }
+      }
+    }
+
     border: 0 !important;
     .tag-input-field {
       margin-top: 15px;
@@ -1704,6 +1687,8 @@ ion-nav-view.main-ion-view {
 #datear-contenido {
   min-height: 80px;
   height: auto;
+  transition: height 0.3s ease;
+  resize: none;
 }
 
 .image-modal-wrap {

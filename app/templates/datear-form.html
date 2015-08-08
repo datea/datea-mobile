@@ -1,167 +1,172 @@
-<div class="dateo-modal datear-modal" ng-class="{'edit-pos': datear.letMapThrough}">
+<ion-view>
+  <div class="dateo-modal datear-modal" ng-class="{'edit-pos': datear.letMapThrough}">
 
-  <div class="map-edit-form" ng-class="{'ng-hide': !datear.showEditMapForm}">
-    <div>
-      <p>Ubica tu dateo en el mapa</p>
-      <!--
-      <label class="item item-input">
-        <input type="text" id="address" ng-disabled="flow.dateaAddress" placeholder="Dirección, esquina, cruce" ng-model="datear.form.address" />
-      </label>-->
-
-      <div class="row">
-        <div class="col col-50">
-          <button class="button button-block button-stable" ng-click="datear.editPosition(false)" type="submit">Sin ubicación</button>
-        </div>
-        <div class="col col-50">
-          <button class="button button-block button-stable icon-right ion-chevron-right" ng-click="datear.editPosition(false)" type="submit">Seguir</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-input-wrap" ng-class="{'ng-hide': !datear.editingContent}">
-    <div class="datear-contenido">
-        <textarea id="datear-contenido" placeholder="ingresa el contenido" ng-model="datear.object.content" ng-minlength="3" required ></textarea>
-    </div>
-    <div class="kbcontrol-bar">
-      <button class="button button-outline button-light icon-right ion-chevron-right" ng-click="datear.closeKeyboard()">Seguir</button>
-    </div>
-  </div>
-
-  <div class="tag-input-wrap" ng-class="{'ng-hide': !datear.editingTags}">
-    <div class="tag-input-field">
-        <input type="text" placeholder="Ingresa tu #etiqueta" id="datear-hashtags" ng-model="datear.form.nextTag" ng-change="datear.printAutocomplete(datear.form.nextTag)" ng-enter="datear.addTag(datear.form.nextTag)" />
-        <button class="clear-search button button-clear button-light icon ion-close ng-hide" ng-click="datear.clearTagInput()" ng-class="{'ng-hide': !datear.form.nextTag}"></button>
-        <button class="button button-add icon ion-plus" ng-click="datear.addTag(datear.form.nextTag)"></button>
-    </div>
-    <div class="datear-autocomplete" ng-class="{'ng-hide': !datear.showAutocomplete}">
-        <ion-scroll direction="y" scrollbar-y="true" delegate-handle="scrollAuto">
-            <div class="back-action" ng-click="datear.closeTagEdit()"></div>
-            <a class="tag-item" ng-repeat="auto in datear.itemsAutocomplete track by $index" ng-click="datear.selectAuto( auto )">#{{auto}}</a>
-        </ion-scroll>
-    </div>
-    <div class="result" ng-click="datear.closeTagEdit()">
-      <div class="sub-title">seleccionadas:</div>
-      <div class="selected-tags button-group">
-          <a class="button-tag tag-selected" ng-repeat="tag in datear.selectedTags track by $index">
-              <i class="icon ion-close-round"></i> #{{ tag }}
-          </a>
-          <span class="no-selected-tags" ng-class="{'ng-hide': !datear.selectedTags.length}">-- ninguna aún --</span>
-      </div>
-    </div>
-    <div class="back-action" ng-click="datear.closeTagEdit()"></div>
-  </div>
-
-  <ion-content class="dateo-modal-content overflow-scroll invisible {{datear.mode}}" ng-class="{invisible: !datear.showDatearForm}" scroll="true" ng-class="{'ng-hide': datear.showEditMap || datear.hideDatearForm}" ng-style="datear.containerStyle" delegate-handle="datear-form-modal">
-
-    <div class="map-transparent" ng-click="datear.editPosition(true)">
-      <div class="edit-icon"><i class="icon ion-edit"></i> editar posición</div>
-    </div>
-
-    <div class="dateo-content-bg"></div>
-
-    <div class="visible-content">
-
-      <form novalidate class="datear-form" role="form" name="form">
-
-        <div class="step step-1">
-            <p class="step-title">Ingresa el contenido de tu dateo</p>
-            <div class="datear-contenido">
-                <textarea id="datear-contenido-2" class="ng-hide" placeholder="contenido" cols="20" ng-model="datear.object.content" ng-minlength="3" required ></textarea>
-                <div class="textarea-fake" ng-class="{'placeholder': !datear.object.content}" ng-click="datear.editContent()">{{datear.object.content || 'contenido'}}</div>
-            </div>
-        </div>
-
-        <div class="step step-2">
-
-            <button class="button button-camera" ng-click="datear.openImageModal()" ng-class="{'ng-hide': !!datear.form.ImgUrl}">
-              <i class="icon ion-camera"></i>
-              <div>agrega una imagen <small>(opcional)</small></div>
-            </button>
-
-            <figure class="center item-image" ng-class="{'ng-hide': !datear.form.ImgUrl}" ng-click="datear.takeImage()">
-                <img ng-src="{{datear.form.ImgUrl}}" alt="Image Dateo">
-            </figure>
-
-        </div>
-
-        <div class="step step-3 relative item">
-          <p class="step-title">Etiqueta tu dateo</p>
-
-          <div class="tag-input-field">
-              <div class="input-text-fake" ng-click="datear.openTagInput()">Ingresa tu #etiqueta</div>
-              <button class="button button-add icon ion-plus" ng-click="datear.addTag(datear.form.nextTag)"></button>
-          </div>
-
-          <div class="sub-title">sugeridas:</div>
-
-          <ion-slide-box class="suggested-tags-slidebox" ng-class="{'has-more': datear.suggestedTags.length > datear.maxSuggested}" delegate-handle="suggestedTags" show-pager="false" on-slide-changed="datear.tagsPageChanged($index)">
-              <ion-slide>
-                  <div class="button-group">
-                      <a class="button-tag" ng-class="{selected: datear.tagIsSelected(sug)}" ng-repeat="sug in datear.suggestedTags | limitTo:datear.limitSuggested track by $index" ng-click="datear.addTag( sug )">#{{ sug }}</a>
-                      <a class="more-followed-tags" href ng-click="datear.toggleSuggestedExpand()" ng-class="{'ng-hide': datear.suggestedTags.length <= datear.maxSuggested}"><i class="icon" ng-class="{true: 'ion-ios-arrow-down', false: 'ion-ios-arrow-up' }[datear.limitSuggested == datear.maxSuggested]"></i></a>
-                  </div>
-              </ion-slide>
-              <ion-slide ng-class="{'ng-hide': !datear.suggestedTags2.length}">
-                  <div class="button-group">
-                      <a class="button-tag" ng-class="{selected: datear.tagIsSelected(sug)}" ng-repeat="sug in datear.suggestedTags2 track by $index" ng-click="datear.addTag( sug )">#{{ sug }}</a>
-                  </div>
-              </ion-slide>
-          </ion-slide-box>
-
-          <div class="sub-title">seleccionadas:</div>
-
-          <div class="selected-tags button-group">
-              <a class="button-tag tag-selected" ng-repeat="tag in datear.selectedTags track by $index" ng-click="datear.removeTag($index)">
-                  <i class="icon ion-close-round"></i> #{{ tag }}
-              </a>
-              <span class="no-selected-tags" ng-class="{'ng-hide': datear.selectedTags.length}">-- ninguna aún --</span>
-          </div>
-        </div>
-
+    <div class="map-edit-form" ng-class="{'ng-hide': !datear.showEditMapForm}">
+      <div>
+        <p>Ubica tu dateo en el mapa</p>
         <!--
-        <div class="item">
-            <p>Compartir tu dateo por:</p>
-            <div class="row">
-                <div class="col col-50">
-                    <ion-checkbox ng-model="datear.form.fb">
-                        <a class="button button-icon icon ion-social-facebook"></a>
-                    </ion-checkbox>
-                </div>
-                <div class="col col-50">
-                    <ion-checkbox ng-model="datear.form.tw">
-                        <a class="button button-icon icon ion-social-twitter"></a>
-                    </ion-checkbox>
-                </div>
-            </div>
-        </div>-->
+        <label class="item item-input">
+          <input type="text" id="address" ng-disabled="flow.dateaAddress" placeholder="Dirección, esquina, cruce" ng-model="datear.form.address" />
+        </label>-->
 
-        <div class="datear-gray-bg">
-            <div class="row">
-                <div class="col col-70"><span>&nbsp;</span></div>
-                <div class="col col-30">
-                    <button class="button button-block button-submit-dateo icon-right ion-checkmark" ng-click="datear.doDatear()" type="submit" ng-disabled="!form.$valid">{{datear.submitLabel}}</button>
-                </div>
-            </div>
+        <div class="row">
+          <div class="col col-50">
+            <button class="button button-block button-stable" ng-click="datear.editPosition(false)" type="submit">Sin ubicación</button>
+          </div>
+          <div class="col col-50">
+            <button class="button button-block button-stable icon-right ion-chevron-right" ng-click="datear.editPosition(false)" type="submit">Seguir</button>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
-  </ion-content>
-  <ion-content class="datear-follow-tags overflow-scroll" ng-class="{'ng-hide': !datear.showFollowTags}">
-    <p class="msg">Tu dateo tiene etiquetas que no sigues. Quieres seguirlas ahora?</p>
-    <ul class="list">
-      <li class="item item-checkbox" ng-repeat="tag in datear.followThisTags track by $index">
-        <div class="tag">
-         <label class="checkbox">
-           <input type="checkbox" checklist-model="datear.followTagChecklist" checklist-value="tag">
-         </label>
-         #{{tag.tag}}
-         </div>
-         <div class="num-dateos pull-right" ng-class="{'ng-hide': !tag.dateo_count}"><i class="icon-burbuja"></i> {{tag.dateo_count}}</div>
-      </li>
-    </ul>
-    <div class="buttons">
-      <div class="button button-green icon-right ion-chevron-right" ng-click="datear.followDateoTags()">Continuar</div>
+
+    <div class="tag-input-wrap" ng-class="{'ng-hide': !datear.editingTags}">
+      <div class="tag-input-field">
+          <input type="text" placeholder="Ingresa tu #etiqueta" id="datear-hashtags" ng-model="datear.form.nextTag" ng-change="datear.printAutocomplete(datear.form.nextTag)" ng-enter="datear.addTag(datear.form.nextTag)" />
+          <button class="clear-search button button-clear button-light icon ion-close ng-hide" ng-click="datear.clearTagInput()" ng-class="{'ng-hide': !datear.form.nextTag}"></button>
+          <button class="button button-add icon ion-plus" ng-click="datear.addTag(datear.form.nextTag)"></button>
+      </div>
+      <div class="datear-autocomplete" ng-class="{'ng-hide': !datear.showAutocomplete}">
+          <ion-scroll direction="y" scrollbar-y="true" delegate-handle="scrollAuto">
+              <div class="back-action" ng-click="datear.closeTagEdit()"></div>
+              <a class="tag-item" ng-repeat="auto in datear.itemsAutocomplete track by $index" ng-click="datear.selectAuto( auto )">#{{auto}}</a>
+          </ion-scroll>
+      </div>
+      <div class="result" ng-click="datear.closeTagEdit()">
+        <div class="sub-title">seleccionadas:</div>
+        <div class="selected-tags button-group">
+            <a class="button-tag tag-selected" ng-repeat="tag in datear.selectedTags track by $index">
+                <i class="icon ion-close-round"></i> #{{ tag }}
+            </a>
+            <span class="no-selected-tags" ng-class="{'ng-hide': !datear.selectedTags.length}">-- ninguna aún --</span>
+        </div>
+      </div>
+      <div class="back-action" ng-click="datear.closeTagEdit()"></div>
     </div>
-  </ion-content>
-</div>
+
+    <div class="dateo-modal-content invisible {{datear.mode}}" ng-class="{invisible: !datear.showDatearForm}" ng-class="{'ng-hide': datear.showEditMap || datear.hideDatearForm}" ng-if="!datear.showFollowTags">
+    <ion-content scroll="true"  delegate-handle="datear-form-modal">
+
+      <div class="map-transparent" ng-click="datear.editPosition(true)">
+        <div class="edit-icon"><i class="icon ion-edit"></i> editar posición</div>
+      </div>
+
+      <div class="dateo-content-bg"></div>
+
+      <div class="visible-content">
+
+        <form novalidate class="datear-form" role="form" name="form">
+
+          <div class="step step-1">
+              <p class="step-title">Ingresa el contenido de tu dateo</p>
+              <div class="datear-contenido">
+                  <textarea class="autogrow" id="datear-contenido" placeholder="contenido" ng-model="datear.object.content" ng-minlength="3" required ng-keydown="flow.autogrow()" ng-keyup="flow.autogrow()"></textarea>
+              </div>
+          </div>
+
+          <div class="step step-2">
+
+              <button class="button button-camera" ng-click="datear.openImageModal()" ng-class="{'ng-hide': !!datear.form.ImgUrl}">
+                <i class="icon ion-camera"></i>
+                <div>agrega una imagen <small>(opcional)</small></div>
+              </button>
+
+              <figure class="center item-image" ng-class="{'ng-hide': !datear.form.ImgUrl}" ng-click="datear.takeImage()">
+                  <img ng-src="{{datear.form.ImgUrl}}" alt="Image Dateo">
+              </figure>
+
+          </div>
+
+          <div class="step step-3 relative item">
+            <p class="step-title">Etiqueta tu dateo</p>
+
+            <div class="tag-input">
+              <div class="tag-input-field">
+                <label>
+                <input type="text" placeholder="Ingresa tu #etiqueta" id="datear-hashtags" ng-model="datear.form.nextTag" ng-change="datear.printAutocomplete(datear.form.nextTag)" ng-enter="datear.addTag(datear.form.nextTag)" />
+                </label>
+                <button class="clear-search button button-clear button-light icon ion-close ng-hide" ng-click="datear.clearTagInput()" ng-class="{'ng-hide': !datear.form.nextTag}"></button>
+                <button class="button button-add icon ion-plus" ng-click="datear.addTag(datear.form.nextTag)"></button>
+              </div>
+              <div class="datear-autocomplete" ng-class="{'ng-hide': !datear.showAutocomplete}">
+                  <ion-scroll direction="y" scrollbar-y="true" delegate-handle="scrollAuto">
+                      <div class="back-action" ng-click="datear.closeTagEdit()"></div>
+                      <a class="tag-item" ng-repeat="auto in datear.itemsAutocomplete track by $index" ng-click="datear.selectAuto( auto )">#{{auto}}</a>
+                  </ion-scroll>
+              </div>
+            </div>
+
+            <div class="sub-title" ng-show="datear.suggestedTags.length">sugeridas:</div>
+
+            <ion-slide-box class="suggested-tags-slidebox" ng-class="{'has-more': datear.suggestedTags.length > datear.maxSuggested}" delegate-handle="suggestedTags" show-pager="false" on-slide-changed="datear.tagsPageChanged($index)">
+                <ion-slide>
+                    <div class="button-group">
+                        <a class="button-tag" ng-class="{selected: datear.tagIsSelected(sug)}" ng-repeat="sug in datear.suggestedTags | limitTo:datear.limitSuggested track by $index" ng-click="datear.addTag( sug )">#{{ sug }}</a>
+                        <a class="more-followed-tags" href ng-click="datear.toggleSuggestedExpand()" ng-class="{'ng-hide': datear.suggestedTags.length <= datear.maxSuggested}"><i class="icon" ng-class="{true: 'ion-ios-arrow-down', false: 'ion-ios-arrow-up' }[datear.limitSuggested == datear.maxSuggested]"></i></a>
+                    </div>
+                </ion-slide>
+                <ion-slide ng-class="{'ng-hide': !datear.suggestedTags2.length}">
+                    <div class="button-group">
+                        <a class="button-tag" ng-class="{selected: datear.tagIsSelected(sug)}" ng-repeat="sug in datear.suggestedTags2 track by $index" ng-click="datear.addTag( sug )">#{{ sug }}</a>
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+
+            <div class="sub-title">seleccionadas:</div>
+
+            <div class="selected-tags button-group">
+                <a class="button-tag tag-selected" ng-repeat="tag in datear.selectedTags track by $index" ng-click="datear.removeTag($index)">
+                    <i class="icon ion-close-round"></i> #{{ tag }}
+                </a>
+                <span class="no-selected-tags" ng-class="{'ng-hide': datear.selectedTags.length}">-- ninguna aún --</span>
+            </div>
+          </div>
+
+          <!--
+          <div class="item">
+              <p>Compartir tu dateo por:</p>
+              <div class="row">
+                  <div class="col col-50">
+                      <ion-checkbox ng-model="datear.form.fb">
+                          <a class="button button-icon icon ion-social-facebook"></a>
+                      </ion-checkbox>
+                  </div>
+                  <div class="col col-50">
+                      <ion-checkbox ng-model="datear.form.tw">
+                          <a class="button button-icon icon ion-social-twitter"></a>
+                      </ion-checkbox>
+                  </div>
+              </div>
+          </div>-->
+
+          <div class="datear-gray-bg">
+              <div class="row">
+                  <div class="col col-70"><span>&nbsp;</span></div>
+                  <div class="col col-30">
+                      <button class="button button-block button-submit-dateo icon-right ion-checkmark" ng-click="datear.doDatear()" type="submit" ng-disabled="!form.$valid">{{datear.submitLabel}}</button>
+                  </div>
+              </div>
+          </div>
+        </form>
+      </div>
+    </ion-content>
+    </div>
+    <ion-content class="datear-follow-tags overflow-scroll" ng-if="datear.showFollowTags">
+      <p class="msg">Tu dateo tiene etiquetas que no sigues. Quieres seguirlas ahora?</p>
+      <ul class="list">
+        <li class="item item-checkbox" ng-repeat="tag in datear.followThisTags track by $index">
+          <div class="tag">
+           <label class="checkbox">
+             <input type="checkbox" checklist-model="datear.followTagChecklist" checklist-value="tag">
+           </label>
+           #{{tag.tag}}
+           </div>
+           <div class="num-dateos pull-right" ng-class="{'ng-hide': !tag.dateo_count}"><i class="icon-burbuja"></i> {{tag.dateo_count}}</div>
+        </li>
+      </ul>
+      <div class="buttons">
+        <div class="button button-green icon-right ion-chevron-right" ng-click="datear.followDateoTags()">Continuar</div>
+      </div>
+    </ion-content>
+  </div>
+</ion-view>
