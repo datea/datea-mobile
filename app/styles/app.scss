@@ -128,6 +128,17 @@ textarea {
   //  transform: translateZ(0);
 }
 
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 .user-content {
   a { color: $green;}
 }
@@ -1358,7 +1369,7 @@ ion-nav-view.main-ion-view {
   border-radius: 5px;
   cursor: pointer;
   margin: 0 5px 5px 0;
-  font-size: 18px;
+  font-size: 1em;
   display: block;
   float: left;
   padding: 1px 5px;
@@ -1372,103 +1383,6 @@ ion-nav-view.main-ion-view {
     background-color: #E8ECEA;
   }
 }
-
-@mixin tag-input-form {
-  .step-title {
-      margin-bottom: 3px;
-    }
-  .sub-title {
-    color: #777;
-    font-size: 15px;
-    margin-bottom: 3px;
-  }
-
-  .button-group, .selected-tags {
-    white-space: normal;
-  }
-
-  .suggested-tags-slidebox {
-    width: 100%;
-    //margin: 0 -8px 15px -8px;
-    margin-bottom: 10px;
-    &.has-more {
-      margin-bottom: 0px;
-    }
-    .button-tag {
-      color: $green;
-    }
-  }
-
-  .button-tag {
-    @include button-tag;
-  }
-
-  .selected-tags {
-    overflow: hidden;
-    min-height: 50px;
-    //margin: 0 -8px;
-    .button-tag {
-      color: $purple;
-      background-color: white;
-      .icon {
-        font-size: 15px;
-        margin-right: 4px;
-      }
-    }
-    .no-selected-tags {
-      color: #888;
-    }
-  }
-
-  .more-followed-tags {
-    clear: both;
-    display: block;
-    text-align: center;
-    line-height: 40px;
-    font-size: 28px;
-    color: #888;
-  }
-
-  .tag-input-field {
-    position: relative;
-    input, .input-text-fake {
-      padding: 8px;
-      border-radius: 7px;
-      border: 1px solid #ccc;
-      line-height: 20px;
-      height: 44px;
-    }
-    .input-text-fake {
-      background-color: white;
-      color: #999;
-      vertical-align: middle;
-    }
-    padding: 0 64px 0 0;
-    margin-bottom: 15px;
-    .button-add.button {
-      width: 47px;
-      min-width: 47px;
-      height: 47px;
-      padding: 0;
-      line-height: 47px;
-      color: white;
-      position: absolute;
-      right: 7px;
-      top: 0px;
-      border-radius: 50%;
-      background-color: $gray-dark-bg;
-      &.icon:before {
-        line-height: 47px;
-      }
-    }
-    .clear-search.button {
-      position: absolute;
-      right: 64px;
-      top: 8px;
-    }
-  }
-}
-
 
 .datear-modal {
 
@@ -1612,37 +1526,78 @@ ion-nav-view.main-ion-view {
     padding: 10px;
     margin-top: 10px;
     background-color: #E8ECEA;
-    .tag-input {
-      @include tag-input-form;
+    position: relative;
+    @include clearfix();
+    overflow: visible;
 
-      .back-action {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
+    .tag-input {
+
+      .tag-input-field {
+        position: relative;
+        z-index: 11;
+        margin-top: 15px;
+
+        input, .input-text-fake {
+          padding: 8px;
+          border-radius: 7px;
+          border: 1px solid #ccc;
+          line-height: 20px;
+          height: 44px;
+        }
+        .input-text-fake {
+          background-color: white;
+          color: #999;
+          vertical-align: middle;
+        }
+        padding: 0 64px 0 0;
+        margin-bottom: 15px;
+        .button-add.button {
+          width: 47px;
+          min-width: 47px;
+          height: 47px;
+          padding: 0;
+          line-height: 47px;
+          color: white;
+          position: absolute;
+          right: 3px;
+          top: -1px;
+          border-radius: 50%;
+          background-color: $gray-dark-bg;
+          &.icon:before {
+            line-height: 47px;
+          }
+        }
+        .clear-search.button {
+          position: absolute;
+          right: 64px;
+          top: 3px;
+        }
       }
 
       .datear-autocomplete {
+        opacity: 1;
+        &.ng-hide {
+          opacity: 0;
+        }
+
         position: absolute;
+        z-index: 10;
+        top: 40px;
         //bottom: 0;
         right: 0;
         left: 0;
-        background-color: #E8ECEA;
-        padding: 0 8px;
+        background-color: white; //#E8ECEA;
+        padding: 60px 6px 10px;
+        box-shadow: 0px 5px 10px #999;
 
         .tag-item {
           position: relative;
           z-index: 2;
           @include button-tag;
-          //font-size: 16px;
-          //padding: 1px 5px;
-          //line-height: 34px;
         }
 
         vertical-align: baseline;
-        @include transition_set(opacity, 0.2s, ease-in);
+        @include transition_set(opacity, 0.5s, ease-in);
 
         &.visible {
           z-index: 20;
@@ -1651,22 +1606,80 @@ ion-nav-view.main-ion-view {
       }
     }
 
-    border: 0 !important;
-    .tag-input-field {
-      margin-top: 15px;
+    .step-title {
+      margin-bottom: 3px;
+    }
+    .sub-title {
+      color: #777;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .suggested-tags-slidebox {
+      width: 100%;
+      margin-bottom: 10px;
+      &.has-more {
+        margin-bottom: 0px;
+      }
+      .button-tag {
+        color: $green;
+      }
+    }
+
+    .button-tag {
+      @include button-tag;
+    }
+
+    .selected-tags.button-group {
+      white-space: normal;
+      min-height: 50px;
+      .button-tag {
+        color: $purple;
+        background-color: white;
+        .icon {
+          font-size: 15px;
+          margin-right: 4px;
+        }
+      }
+      .no-selected-tags {
+        color: #888;
+        display: block;
+        padding: 15px 0;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+      }
+    }
+
+    .more-followed-tags {
+      clear: both;
+      display: block;
+      text-align: center;
+      line-height: 40px;
+      font-size: 28px;
+      color: #888;
     }
   }
-  .button-submit-dateo {
-    color: white;
-    background-color: $purple;
-    font-size: 20px;
-    font-weight: bold;
-    &.icon-right:before {
-      font-size: 25px;
-      line-height: 47px;
-    }
+  .action-btns {
     position: relative;
-    left: -8px;
+    z-index: 1;
+    padding: 30px 15px 50px;
+    text-align: center;
+
+    .button-submit-dateo {
+      color: black;
+      background-color: $yellow;
+      border-color: darken($yellow, 50%);
+      border-width: 1px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 55%;
+      &.icon-right:before {
+        font-size: 25px;
+        line-height: 47px;
+      }
+      position: relative;
+    }
   }
 }
 
