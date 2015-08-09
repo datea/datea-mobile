@@ -1684,16 +1684,18 @@ ion-nav-view.main-ion-view {
 }
 
 .datear-follow-tags {
-  background-color: white;
-  .list .item {
-    .tag {float: left; font-size: 18px;}
-  }
-  .msg { padding: 16px 16px; color: white; background-color: $gray-dark-bg;}
-  .buttons { padding: 16px; text-align: right;}
+  .scroll-content {
+    background-color: white;
+    .list .item {
+      .tag {float: left; font-size: 18px;}
+    }
+    .msg { padding: 16px 16px; color: white; background-color: $gray-dark-bg;}
+    .buttons { padding: 16px; text-align: right;}
 
-  .checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
-    background-color: $green;
-    border-color: $green;
+    .checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+      background-color: $green;
+      border-color: $green;
+    }
   }
 }
 
