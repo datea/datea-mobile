@@ -124,7 +124,7 @@
         <i class="icon-burbuja"></i>
       </a>
 
-      <a class="button button-datear edit ng-hide" ui-sref="home.dateoEdit({dateoId: nav.state.params.dateoId})" ng-class="{'ng-hide': !nav.datear.editDateo}">
+      <a class="button button-datear edit ng-hide" ui-sref="home.dateoEdit({dateoId: nav.state.params.dateoId})" ng-class="{'ng-hide': !nav.datear.editDateo || !flow.showDatearBtn}">
         <span>editar</span>
         <i class="icon ion-edit"></i>
       </a>

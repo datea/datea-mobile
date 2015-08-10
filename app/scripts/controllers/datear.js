@@ -476,7 +476,6 @@ function( $scope, $rootScope, $http, $timeout, $ionicPopup, $ionicSlideBoxDelega
         }
         $scope.datear.showAutocomplete = false;
         try { cordova.plugins.Keyboard.close(); } catch(err) {}
-        $scope.datear.editingContent = false;
     };
 
     $scope.datear.clearTagInput = function () {
@@ -675,25 +674,9 @@ function( $scope, $rootScope, $http, $timeout, $ionicPopup, $ionicSlideBoxDelega
         }
     };
 
-    $scope.$on('keyboard:show', function (e, args) {
-        $scope.datear.keyboardOpen = true;
-        $scope.datear.keyboardHeight = args.keyboardHeight;
-        $scope.datear.containerStyle = {bottom: args.keyboardHeight+'px'};
-        //$scope.datear.tagInputStyle = {top: args.keyboardHeight+'px'};
-        /*if (document.getElementById('datear-hashtags') === document.activeElement) {
-            $ionicScrollDelegate.$getByHandle('datear-form-modal').scrollBottom();
-        }*/
-    });
-
     $scope.$on('keyboard:hide', function () {
-        $scope.datear.keyboardOpen = false;
-        $scope.datear.keyboardHeight = 0;
-        $scope.datear.editingContent = false;
         $scope.datear.editingTags = false;
-        $scope.datear.containerStyle = null;
         $scope.datear.itemsAutocomplete = [];
         $scope.datear.showAutocomplete = false;
-        Nav.header.noButtons = false;
-        console.log('kb hide');
     });
 });

@@ -22,7 +22,7 @@
 			<div class="tag-entry tag-followed" ng-repeat="etiqueta in tags.followed track by etiqueta.id" ng-class="{'ng-hide': tags.noFollowed}">
 	     	<ion-item class="item-stable" ng-click="flow.toggleButtons('f'+etiqueta.id)" ng-class="{active: flow.isGray == 'f'+etiqueta.id}">
 	     		<div class="tag"><span class="color-demo viscolor-{{($index % 20) + 1}}"></span> #{{::etiqueta.tag }}</div>
-	     		<div class="campaign-hint" ng-class="{'ng-hide': !etiqueta.campaigns.length}"><span class="hint"><span ng-class="{'ng-hide': etiqueta.campaigns.length <= 1}">{{::etiqueta.campaigns.length}} </span>iniciativa<span ng-class="{'ng-hide': etiqueta.campaigns.length <= 1}">s</span> de <br><span ng-repeat="camp in etiqueta.campaigns track by camp.id | limitTo:2">{{::camp.username}}<span ng-class="{'ng-hide': $last}">,</span></span></span></div>
+	     		<div class="campaign-hint" ng-class="{'ng-hide': !etiqueta.campaigns.length}"><span class="hint"><span ng-class="{'ng-hide': etiqueta.campaigns.length <= 1}">{{::etiqueta.campaigns.length}} </span>iniciativa<span ng-class="{'ng-hide': etiqueta.campaigns.length <= 1}">s</span> de <br><span ng-repeat="camp in etiqueta.campaigns track by camp.id | limitTo:2">{{::camp.username}}<span ng-class="{'ng-hide': $last}">, </span></span></span></div>
 	     	</ion-item>
 	      <ion-item class="item-accordion" ng-style="{ height: flow.accordionHeight('f'+etiqueta.id)}">
 

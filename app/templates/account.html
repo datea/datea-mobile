@@ -1,6 +1,6 @@
-<div class="account-edit-view" ng-class="{'ng-hide' : !flow.showEditPage}">
+<div class="account-edit-view" ng-class="{'slideout' : !flow.showEditPage}">
 
-    <ion-content scroll="true" scrollbar-y="false" ng-style="flow.containerStyle">
+    <ion-content scroll="true" scrollbar-y="false">
         <div class="msg-account" ng-class="{'ng-hide': !flow.showWelcomeMsg}">
             <div class="limiter" ng-class="{'ng-hide': !flow.isNewUser}">
                 <div ng-class="{'ng-hide': account.status !== 1}">
@@ -32,7 +32,6 @@
         <div class="account padding-top" ng-controller="AccountCtrl">
             <div class="limiter">
                 <form role="form" name="account_form" ng-submit="account.save()"  novalidate>
-
                     <div class="list">
                         <h4 class="center">Cuenta de usuario</h4>
                         <label class="item item-input">

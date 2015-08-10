@@ -31,8 +31,9 @@ angular.module('dateaMobileApp')
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
                 if (toState.name === 'home.campaigns' && fromState.name === 'home.campaigns.detail') {
                     $ionicScrollDelegate.$getByHandle('campaignScroll').scrollTo(0, $scope.flow.scrollPos, false);
-                     Nav.header.setBackFunc(function () {
+                    Nav.header.setBackFunc(function () {
                         Nav.pages.show = false;
+                        Nav.reduceMap(false);
                         $timeout(function () { Nav.state.go('home');}, 180);
                     });
                 }

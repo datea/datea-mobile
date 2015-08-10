@@ -1,139 +1,130 @@
 <ion-view>
 <div class="dateo-modal dateo-detail">
 
-    <div class="comment-input-wrap" ng-class="{'ng-hide': !flow.editingComment}">
-        <div class="contenido">
-            <textarea id="comment-input" placeholder="déjanos tu comentario" ng-model="flow.commentInput" ng-minlength="2" required ></textarea>
-        </div>
-        <div class="kbcontrol-bar">
-          <button class="button-close pull-left button button-outline button-light icon-left ion-close" ng-click="flow.closeEditComment()">Cerrar</button>
-          <button class="button button-outline button-light icon-right ion-android-send" ng-click="flow.postComment()">Enviar</button>
-        </div>
-    </div>
-
     <ion-slide-box show-pager="false" on-slide-changed="flow.slideHasChanged($index)" delegate-handle="dateosSlider">
         <ion-slide ng-repeat="dateo in listSliders track by $index">
 
-            <ion-content scroll="true" scrollbar-y="false" class="dateo-modal-content overflow-scroll {{$index==0 && 'invisible'}}" ng-class="{invisible: !flow.showDateo, 'ng-hide': flow.hideDateo}" delegate-handle="{{'scrollDateo'+dateo.id}}">
+            <div class="dateo-modal-content overflow-scroll {{$index==0 && 'invisible'}}" ng-class="{invisible: !flow.showDateo, 'ng-hide': flow.hideDateo}">
+                <ion-content scroll="true" scrollbar-y="false" delegate-handle="{{'scrollDateo'+dateo.id}}">
 
-                <div class="map-transparent" ng-click="flow.closeDateo()" ng-class="{'ng-hide': !dateo.position}"></div>
+                    <div class="map-transparent" ng-click="flow.closeDateo()" ng-class="{'ng-hide': !dateo.position}"></div>
 
-                <div class="dateo-content-bg"></div>
+                    <div class="dateo-content-bg"></div>
 
-                <div class="visible-content dateo dateo-content">
+                    <div class="visible-content dateo dateo-content">
 
-                    <div class="new-dateo-message" ng-class="{'ng-hide': !dateo.isNew}">
-                        <button class="button button-close button-clear button-stable" ng-click="dateo.isNew = false"><i class="icon ion-close"></i></button>
-                        <div class="inner">
-                            <div class="datero" ng-class="{0: 'datero1', 1: 'datero2' }[flow.daterito]"></div>
-                            <h4>¡Gracias!</h4>
-                            <div class="share"><button class="button button-share-new" ng-click="flow.openShare(dateo)"><i class="icon ion-android-share-alt"></i></button></div>
-                            <p>Tu dateo se ha creado exitosamente. ¡Compartelo!</p>
-                        </div>
-                    </div>
-
-                    <div class="user-header">
-                        <div class="uimg" style="background-image: url({{dateo.user.image_small | userImg}});"></div>
-                        <h3 class="uname">{{::dateo.user.username}}</h3>
-                        <div class="date">{{::dateo.date || dateo.created | date:dateFormat}}</div>
-                    </div>
-
-                    <div class="tags">
-                        <div class="tag" ng-repeat="tag in dateo.tags track by $index">
-                            <a ng-click="flow.openFollowTag( tag )">#{{tag.tag}}</a>
-                        </div>
-                    </div>
-
-                    <p class="content user-content" ng-bind-html="dateo.content | extUrls"></p>
-
-                    <figure class="images" ng-class="{'ng-hide': !dateo.images.length}">
-                        <img ng-repeat="image in dateo.images track by $index" ng-src="{{::image.image | apiImg}}" alt="Dateo Image">
-                    </figure>
-
-                    <div class="link" ng-class="{'ng-hide': !dateo.link, 'has-image': dateo.link.img_url}" ng-click="flow.openLink(dateo.link.url)">
-                        <i class="icon ion-link"></i>
-                        <div class="limage ng-hide" ng-class="{'ng-hide': !dateo.link.img_url}">
-                            <img ng-src="{{::dateo.link.img_url}}" alt="" />
-                        </div>
-                        <div class="lcontent">
-                            <h4 class="ltitle">{{::dateo.link.title}}</h4>
-                            <p class="ldesc">{{::dateo.link.description}}</p>
-                        </div>
-                    </div>
-
-                    <div class="files" ng-class="{'ng-hide': !dateo.files.length}">
-                        <a class="file" ng-repeat="file in dateo.files track by $index" href ng-click="flow.openLink('https://api.datea.io'+file.file)">
-                            <i class="icon ion-paperclip"></i>
-                            <span class="file-title">{{::file.title}}</span>
-                        </a>
-                    </div>
-
-                    <div class="actions row">
-                        <a class="col vote-btn action-btn" ng-class="{active: dateo.hasVoted, loading: flow.voteLoading}" href ng-click="flow.doVote()">
-                            <i class="icon fa fa-thumbs-o-up" ng-class="{'ng-hide': flow.voteLoading}"></i>
-                            <span ng-class="{'ng-hide': !flow.voteLoading}"><i class="icon fa fa-refresh action-loading"></i></span>
-                            <div class="num">
-                                <span class="count" ng-class="{'ng-hide': !dateo.vote_count}">{{dateo.vote_count}}</span>
-                                <span class="sublabel" ng-class="{'ng-hide': !(dateo.vote_count == 0)}">apoyar</span>
-                                <span class="sublabel" ng-class="{'ng-hide': !(dateo.vote_count == 1)}">apoyo</span>
-                                <span class="sublabel" ng-class="{'ng-hide': !(dateo.vote_count > 1)}">apoyos</span>
+                        <div class="new-dateo-message" ng-class="{'ng-hide': !dateo.isNew}">
+                            <button class="button button-close button-clear button-stable" ng-click="dateo.isNew = false"><i class="icon ion-close"></i></button>
+                            <div class="inner">
+                                <div class="datero" ng-class="{0: 'datero1', 1: 'datero2' }[flow.daterito]"></div>
+                                <h4>¡Gracias!</h4>
+                                <div class="share"><button class="button button-share-new" ng-click="flow.openShare(dateo)"><i class="icon ion-android-share-alt"></i></button></div>
+                                <p>Tu dateo se ha creado exitosamente. ¡Compartelo!</p>
                             </div>
-                        </a>
+                        </div>
 
-                        <a class="col comment-btn" href ng-click="flow.openEditComment()">
-                            <i class="icon fa fa-comment-o"></i>
-                            <div class="num">
-                                <span class="count" ng-class="{'ng-hide': !dateo.comment_count}">{{dateo.comment_count}}</span>
-                                <span class="sublabel" ng-class="{'ng-hide': !(dateo.comment_count == 0)}">comentar</span>
-                                <span class="sublabel" ng-class="{'ng-hide': !(dateo.comment_count == 1)}">comentario</span>
-                                <span class="sublabel" ng-class="{'ng-hide': !(dateo.comment_count > 1)}">comentarios</span>
+                        <div class="user-header">
+                            <div class="uimg" style="background-image: url({{dateo.user.image_small | userImg}});"></div>
+                            <h3 class="uname">{{::dateo.user.username}}</h3>
+                            <div class="date">{{::dateo.date || dateo.created | date:dateFormat}}</div>
+                        </div>
+
+                        <div class="tags">
+                            <div class="tag" ng-repeat="tag in dateo.tags track by $index">
+                                <a ng-click="flow.openFollowTag( tag )">#{{tag.tag}}</a>
                             </div>
-                        </a>
+                        </div>
 
-                        <a class="col col-33" ng-click="flow.openShare(dateo)">
-                            <i class="icon ion-android-share-alt" ></i>
-                            <div class="num">
-                                <span class="sublabel">compartir</span>
+                        <p class="content user-content" ng-bind-html="dateo.content | extUrls"></p>
+
+                        <figure class="images" ng-class="{'ng-hide': !dateo.images.length}">
+                            <img ng-repeat="image in dateo.images track by $index" ng-src="{{::image.image | apiImg}}" alt="Dateo Image">
+                        </figure>
+
+                        <div class="link" ng-class="{'ng-hide': !dateo.link, 'has-image': dateo.link.img_url}" ng-click="flow.openLink(dateo.link.url)">
+                            <i class="icon ion-link"></i>
+                            <div class="limage ng-hide" ng-class="{'ng-hide': !dateo.link.img_url}">
+                                <img ng-src="{{::dateo.link.img_url}}" alt="" />
                             </div>
-                        </a>
+                            <div class="lcontent">
+                                <h4 class="ltitle">{{::dateo.link.title}}</h4>
+                                <p class="ldesc">{{::dateo.link.description}}</p>
+                            </div>
+                        </div>
 
-                        <!--<a class="tab-item" href="#"><i class="icon ion-android-share"></i></a>-->
-                    </div>
+                        <div class="files" ng-class="{'ng-hide': !dateo.files.length}">
+                            <a class="file" ng-repeat="file in dateo.files track by $index" href ng-click="flow.openLink('https://api.datea.io'+file.file)">
+                                <i class="icon ion-paperclip"></i>
+                                <span class="file-title">{{::file.title}}</span>
+                            </a>
+                        </div>
 
-                    <ion-list class="item-text-wrap comment-list" ng-class="{'ng-hide': !dateo.comment_count}">
-                        <h3>Comentarios:</h3>
-                        <ion-item class="item-avatar comment-item" ng-repeat="comment in dateo.comments track by comment.id">
-                            <img ng-src="{{comment.user.image_small | userImg}}"/>
-                            <h4>{{::comment.user.username}}</h4>
-                            <div class="date">{{::comment.created | date:dateFormat}}</div>
-                            <p class="user-content" ng-bind-html="::comment.comment | extUrls"></p>
-                        </ion-item>
-                    </ion-list>
+                        <div class="actions row">
+                            <a class="col vote-btn action-btn" ng-class="{active: dateo.hasVoted, loading: flow.voteLoading}" href ng-click="flow.doVote()">
+                                <i class="icon fa fa-thumbs-o-up" ng-class="{'ng-hide': flow.voteLoading}"></i>
+                                <span ng-class="{'ng-hide': !flow.voteLoading}"><i class="icon fa fa-refresh action-loading"></i></span>
+                                <div class="num">
+                                    <span class="count" ng-class="{'ng-hide': !dateo.vote_count}">{{dateo.vote_count}}</span>
+                                    <span class="sublabel" ng-class="{'ng-hide': !(dateo.vote_count == 0)}">apoyar</span>
+                                    <span class="sublabel" ng-class="{'ng-hide': !(dateo.vote_count == 1)}">apoyo</span>
+                                    <span class="sublabel" ng-class="{'ng-hide': !(dateo.vote_count > 1)}">apoyos</span>
+                                </div>
+                            </a>
 
-                    <div class="form-comment">
+                            <a class="col comment-btn" href ng-click="flow.focusCommentForm()">
+                                <i class="icon fa fa-comment-o"></i>
+                                <div class="num">
+                                    <span class="count" ng-class="{'ng-hide': !dateo.comment_count}">{{dateo.comment_count}}</span>
+                                    <span class="sublabel" ng-class="{'ng-hide': !(dateo.comment_count == 0)}">comentar</span>
+                                    <span class="sublabel" ng-class="{'ng-hide': !(dateo.comment_count == 1)}">comentario</span>
+                                    <span class="sublabel" ng-class="{'ng-hide': !(dateo.comment_count > 1)}">comentarios</span>
+                                </div>
+                            </a>
 
-                        <div class="textarea-fake" ng-click="flow.openEditComment()">Déjanos tu comentario</div>
+                            <a class="col col-33" ng-click="flow.openShare(dateo)">
+                                <i class="icon ion-android-share-alt" ></i>
+                                <div class="num">
+                                    <span class="sublabel">compartir</span>
+                                </div>
+                            </a>
 
-                        <div>
+                            <!--<a class="tab-item" href="#"><i class="icon ion-android-share"></i></a>-->
+                        </div>
+
+                        <ion-list class="item-text-wrap comment-list" ng-class="{'ng-hide': !dateo.comment_count}">
+                            <h3>Comentarios:</h3>
+                            <ion-item class="item-avatar comment-item" ng-repeat="comment in dateo.comments track by comment.id">
+                                <img ng-src="{{comment.user.image_small | userImg}}"/>
+                                <h4>{{::comment.user.username}}</h4>
+                                <div class="date">{{::comment.created | date:dateFormat}}</div>
+                                <p class="user-content" ng-bind-html="::comment.comment | extUrls"></p>
+                            </ion-item>
+                        </ion-list>
+
+
+                        <form class="form-comment" name="commentForm" ng-if="dateo.id == flow.activeId">
+
+                            <label for="commentField">
+                                <textarea id="comment-area" class="comment-area" placeholder="Déjanos tu comentario" ng-model="flow.commentInput" ng-minlength="2" name="commentField" required ng-keyup="flow.commentAutogrow()" ng-keydown="flow.commentAutogrow()" ng-focus="flow.onCommentAreaFocus()" ng-blur="flow.onCommentAreaBlur()"></textarea>
+                            </label>
+
                             <div class="row">
                                 <div class="col col-33 follow-btns">
                                     <button class="button button-clear button-dark icon-left ion-plus" ng-click="flow.followThread(dateo)" ng-class="{'ng-hide': flow.isFollowing}">seguir hilo</button>
                                     <button class="button button-clear button-green icon-left ion-checkmark-round" ng-click="flow.unfollowThread(dateo)" ng-class="{'ng-hide': !flow.isFollowing}">siguiendo</button>
                                 </div>
+                                <div class="col text-right">
+                                    <button class="button button-comment button-clear button-dark icon-right ion-android-send" ng-click="flow.postComment()" ng-disabled="commentForm.commentField.$invalid">Enviar</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
-                </div>
-            </ion-content>
+                </ion-content>
+            </div>
         </ion-slide>
     </ion-slide-box>
     <div class="tag-follow-view" ui-view="tagFollowPopup"></div>
-
-    <a class="button button-datear edit" href ng-click="flow.editDateo()" ng-class="{'ng-hide': !flow.showEditDateoBtn}">
-        <span>editar</span>
-        <i class="icon ion-pen"></i>
-    </a>
-
 </div>
 </ion-view>
 
