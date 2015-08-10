@@ -48,7 +48,7 @@ angular.module('dateaMobileApp')
                             User.updateUserDataFromStorage();
                             $state.go('home.hello');
 
-                        }, function(response) {
+                        }, function(error) {
 
                             /* Close Loading */
                             $scope.loadingHide();
@@ -69,7 +69,7 @@ angular.module('dateaMobileApp')
                             $scope.loadingHide();
                             $state.go('confirmPass');
 
-                        }, function(response) {
+                        }, function(error) {
 
                             /* Close Loading */
                             $scope.loadingHide();

@@ -21,6 +21,7 @@
     "ionicons": "~2.0.1"
   },
   "resolutions": {
-    "font-awesome": "~4.4.0"
+    "font-awesome": "~4.4.0",
+    "angular": "~1.4.0"
   }
 }

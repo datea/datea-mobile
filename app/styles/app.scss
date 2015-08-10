@@ -128,6 +128,17 @@ textarea {
   //  transform: translateZ(0);
 }
 
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 .user-content {
   a { color: $green;}
 }
@@ -237,7 +248,7 @@ textarea {
 
     @include hw-accelerate;
 
-    &.ng-hide, &.invisible {
+    &.ng-hide, &.invisible, &.slideout {
       -webkit-transform: translateX(100%);
       transform: translateX(100%);
     }
@@ -962,57 +973,6 @@ ion-nav-view.main-ion-view {
       z-index: 2;
     }
   }
-
-  .comment-input-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: white;
-    z-index: 3;
-
-    .contenido {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 47px;
-      top: 0px;
-      textarea {
-        border-radius: 0;
-        padding: 10px;
-        //height: 100%;
-        //width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        resize: none;
-      }
-    }
-    .kbcontrol-bar {
-      background-color: $gray-dark-bg;
-      position: absolute;
-      bottom: 0;
-      height: 47px;
-      left: 0;
-      right: 0;
-      text-align: right;
-      .button {
-        width: 33%;
-        border-radius: 0;
-        &.button-close.button {
-          &.icon-left:before {
-            font-size: 21px;
-            line-height: 47px;
-            position: relative;
-            top: 1px;
-          }
-        }
-      }
-    }
-  }
 }
 
 .platform-ios .dateo-modal {
@@ -1209,27 +1169,34 @@ ion-nav-view.main-ion-view {
 
   .form-comment {
     margin: 0px 16px;
-    padding: 16px 0;
+    padding: 16px 0 60px;
 
-    .textarea-fake {
+    .comment-area {
       border: 1px solid #cfcfcf;
       border-radius: 3px;
       padding: 5px;
       display: block;
       width: 100%;
-      color: #bbb;
+      color: black;
       height: 40px;
       line-height: 28px;
+      resize: none;
     }
 
     .row {
       padding: 0;
       .col { padding: 0; }
-      .button { font-size: 15px;}
+
+      .button-comment { 
+        padding-right: 2px;
+        &.icon-right:before {
+          margin-left: 4px;
+        }
+      }
 
       .follow-btns {
         .button {
-          margin-top: 7px;
+          margin-top: 0px;
           font-size: 14px;
           font-weight: normal;
           text-transform: lowercase;
@@ -1358,7 +1325,7 @@ ion-nav-view.main-ion-view {
   border-radius: 5px;
   cursor: pointer;
   margin: 0 5px 5px 0;
-  font-size: 18px;
+  font-size: 1em;
   display: block;
   float: left;
   padding: 1px 5px;
@@ -1373,108 +1340,20 @@ ion-nav-view.main-ion-view {
   }
 }
 
-@mixin tag-input-form {
-  .step-title {
-      margin-bottom: 3px;
-    }
-  .sub-title {
-    color: #777;
-    font-size: 15px;
-    margin-bottom: 3px;
-  }
-
-  .button-group, .selected-tags {
-    white-space: normal;
-  }
-
-  .suggested-tags-slidebox {
-    width: 100%;
-    //margin: 0 -8px 15px -8px;
-    margin-bottom: 10px;
-    &.has-more {
-      margin-bottom: 0px;
-    }
-    .button-tag {
-      color: $green;
-    }
-  }
-
-  .button-tag {
-    @include button-tag;
-  }
-
-  .selected-tags {
-    overflow: hidden;
-    min-height: 50px;
-    //margin: 0 -8px;
-    .button-tag {
-      color: $purple;
-      background-color: white;
-      .icon {
-        font-size: 15px;
-        margin-right: 4px;
-      }
-    }
-    .no-selected-tags {
-      color: #888;
-    }
-  }
-
-  .more-followed-tags {
-    clear: both;
-    display: block;
-    text-align: center;
-    line-height: 40px;
-    font-size: 28px;
-    color: #888;
-  }
-
-  .tag-input-field {
-    position: relative;
-    input, .input-text-fake {
-      padding: 8px;
-      border-radius: 7px;
-      border: 1px solid #ccc;
-      line-height: 20px;
-      height: 44px;
-    }
-    .input-text-fake {
-      background-color: white;
-      color: #999;
-      vertical-align: middle;
-    }
-    padding: 0 64px 0 0;
-    margin-bottom: 15px;
-    .button-add.button {
-      width: 47px;
-      min-width: 47px;
-      height: 47px;
-      padding: 0;
-      line-height: 47px;
-      color: white;
-      position: absolute;
-      right: 7px;
-      top: 0px;
-      border-radius: 50%;
-      background-color: $gray-dark-bg;
-      &.icon:before {
-        line-height: 47px;
-      }
-    }
-    .clear-search.button {
-      position: absolute;
-      right: 64px;
-      top: 8px;
-    }
-  }
-}
-
-
 .datear-modal {
 
   &.edit-pos {
     top: auto !important;
     height: auto !important;
+  }
+
+  label {
+    display: block;
+  }
+
+  input, textarea {
+    margin-right: 0;
+    width: 100%;
   }
 
   .map-edit-form {
@@ -1548,61 +1427,6 @@ ion-nav-view.main-ion-view {
       }
     }
   }
-  .tag-input-wrap {
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #E8ECEA;
-    z-index: 3;
-    @include tag-input-form;
-
-    padding: 0 10px;
-
-    .tag-input-field {
-      padding-top: 8px;
-      .button-add.button {
-        top: 6px;
-      }
-    }
-
-    .back-action {
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-    }
-
-    .datear-autocomplete {
-      position: absolute;
-      top: 58px;
-      //bottom: 0;
-      right: 0;
-      left: 0;
-      background-color: #E8ECEA;
-      padding: 0 8px;
-
-      .tag-item {
-        position: relative;
-        z-index: 2;
-        @include button-tag;
-        //font-size: 16px;
-        //padding: 1px 5px;
-        //line-height: 34px;
-      }
-
-      vertical-align: baseline;
-      @include transition_set(opacity, 0.2s, ease-in);
-
-      &.visible {
-        z-index: 20;
-        opacity: 1 !important;
-      }
-    }
-  }
 }
 
 
@@ -1667,43 +1491,184 @@ ion-nav-view.main-ion-view {
     padding: 10px;
     margin-top: 10px;
     background-color: #E8ECEA;
-    @include tag-input-form;
-    border: 0 !important;
-    .tag-input-field {
-      margin-top: 15px;
+    position: relative;
+    @include clearfix();
+    overflow: visible;
+
+    .tag-input {
+
+      .tag-input-field {
+        position: relative;
+        z-index: 11;
+        margin-top: 15px;
+
+        input, .input-text-fake {
+          padding: 8px;
+          border-radius: 7px;
+          border: 1px solid #ccc;
+          line-height: 20px;
+          height: 44px;
+        }
+        .input-text-fake {
+          background-color: white;
+          color: #999;
+          vertical-align: middle;
+        }
+        padding: 0 64px 0 0;
+        margin-bottom: 15px;
+        .button-add.button {
+          width: 47px;
+          min-width: 47px;
+          height: 47px;
+          padding: 0;
+          line-height: 47px;
+          color: white;
+          position: absolute;
+          right: 3px;
+          top: -1px;
+          border-radius: 50%;
+          background-color: $gray-dark-bg;
+          &.icon:before {
+            line-height: 47px;
+          }
+        }
+        .clear-search.button {
+          position: absolute;
+          right: 64px;
+          top: 3px;
+        }
+      }
+
+      .datear-autocomplete {
+        opacity: 1;
+        &.ng-hide {
+          opacity: 0;
+        }
+
+        position: absolute;
+        z-index: 10;
+        top: 40px;
+        //bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: white; //#E8ECEA;
+        padding: 60px 6px 10px;
+        box-shadow: 0px 5px 10px #999;
+
+        .tag-item {
+          position: relative;
+          z-index: 2;
+          @include button-tag;
+        }
+
+        vertical-align: baseline;
+        @include transition_set(opacity, 0.5s, ease-in);
+
+        &.visible {
+          z-index: 20;
+          opacity: 1 !important;
+        }
+      }
+    }
+
+    .step-title {
+      margin-bottom: 3px;
+    }
+    .sub-title {
+      color: #777;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .suggested-tags-slidebox {
+      width: 100%;
+      margin-bottom: 10px;
+      &.has-more {
+        margin-bottom: 0px;
+      }
+      .button-tag {
+        color: $green;
+      }
+    }
+
+    .button-tag {
+      @include button-tag;
+    }
+
+    .selected-tags.button-group {
+      white-space: normal;
+      min-height: 50px;
+      .button-tag {
+        color: $purple;
+        background-color: white;
+        .icon {
+          font-size: 15px;
+          margin-right: 4px;
+        }
+      }
+      .no-selected-tags {
+        color: #888;
+        display: block;
+        padding: 15px 0;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+      }
+    }
+
+    .more-followed-tags {
+      clear: both;
+      display: block;
+      text-align: center;
+      line-height: 40px;
+      font-size: 28px;
+      color: #888;
     }
   }
-  .button-submit-dateo {
-    color: white;
-    background-color: $purple;
-    font-size: 20px;
-    font-weight: bold;
-    &.icon-right:before {
-      font-size: 25px;
-      line-height: 47px;
-    }
+  .action-btns {
     position: relative;
-    left: -8px;
+    z-index: 1;
+    padding: 30px 15px 50px;
+    text-align: center;
+
+    .button-submit-dateo {
+      color: black;
+      background-color: $yellow;
+      border-color: darken($yellow, 50%);
+      border-width: 1px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 55%;
+      &.icon-right:before {
+        font-size: 25px;
+        line-height: 47px;
+      }
+      position: relative;
+    }
   }
 }
 
 .datear-follow-tags {
-  background-color: white;
-  .list .item {
-    .tag {float: left; font-size: 18px;}
-  }
-  .msg { padding: 16px 16px; color: white; background-color: $gray-dark-bg;}
-  .buttons { padding: 16px; text-align: right;}
+  .scroll-content {
+    background-color: white;
+    .list .item {
+      .tag {float: left; font-size: 18px;}
+    }
+    .msg { padding: 16px 16px; color: white; background-color: $gray-dark-bg;}
+    .buttons { padding: 16px; text-align: right;}
 
-  .checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
-    background-color: $green;
-    border-color: $green;
+    .checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+      background-color: $green;
+      border-color: $green;
+    }
   }
 }
 
 #datear-contenido {
   min-height: 80px;
   height: auto;
+  transition: height 0.3s ease;
+  resize: none;
 }
 
 .image-modal-wrap {
@@ -1981,6 +1946,7 @@ ion-nav-view.main-ion-view {
 
     &.edit {
       background-color: $green;
+      color: white;
       i {
         font-size: 32px;
         position: relative;
@@ -1991,19 +1957,25 @@ ion-nav-view.main-ion-view {
 
   .map-btn {
     position: absolute;
-    left: 7px;
+    left: 10px;
     line-height: 42px;
     font-size: 26px;
     height: 42px;
+    width: 42px;
+    padding: 0;
     text-align: center;
     background-color: transparent;
     border: 0;
+    margin:0;
+    display: block;
     .icon {
       line-height: 38px;
       display: block;
       background-color: rgba(255,255,255, 0.9);
       width: 38px;
       height: 38px;
+      margin: 0 !important;
+      padding: 0 !important;
       color: #999;
       box-shadow: 0px 0px 4px #444;
       border-radius: 50%;
@@ -2531,6 +2503,7 @@ ion-nav-view.main-ion-view {
     .load-more {
       padding: 10px 0 40px 0;
       text-align: center;
+      margin-bottom: 40px;
       .button {
         border: 1px solid #b2b2b2;
       }

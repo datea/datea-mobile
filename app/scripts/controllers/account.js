@@ -6,13 +6,11 @@ angular.module('dateaMobileApp').controller('AccountCtrl', ['$scope', '$location
         $scope.account = User.data;
         $scope.flow = {};
         $scope.flow.isNewUser = User.isNew();
-        console.log('user new', $scope.flow.isNewUser);
-        console.log('user status', User.data.status);
         $scope.flow.showEditPage = true;
 
         if (Nav.state.current.name !== 'accountInit') {
             Nav.header.setBackFunc(function () {
-              $scope.flow.showEditPage = false;
+              $scope.flow.showEditPage = false;;
               Nav.pages.show = false;
               Nav.reduceMap(false);
               $timeout(function () { $state.go('home');}, 180);
