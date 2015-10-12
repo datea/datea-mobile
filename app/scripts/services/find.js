@@ -203,7 +203,7 @@ angular.module('dateaMobileApp')
               .then(function (map) {
                   var zoom = map.getZoom();
                   var bounds = map.getBounds();
-                  if (zoom >= config.query.minQueryZoom) {
+                  if (zoom >= config.query.minQueryZoom || !!args.refresh) {
                       if (!query.searchedBounds || !query.searchedBounds.contains(bounds)) {
                           //console.log("update search!");
                           var params = query.buildParams();

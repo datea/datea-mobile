@@ -17,11 +17,10 @@ function(
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // LOGIN LANDING
   $scope.flow.withFacebook = function() {
-      /*  Show Loading  */
-      $ionicLoading.show(config.loadingTpl);
 
       OAuth.popup('facebook')
       .done(function (result) {
+          $ionicLoading.show(config.loadingTpl);
           var partyGivens = {};
           partyGivens.access_token = result.access_token;
           partyGivens.party = 'facebook';
@@ -55,11 +54,10 @@ function(
 
   $scope.flow.withTwitter = function() {
       /*  Show Loading  */
-      $ionicLoading.show(config.loadingTpl);
 
       OAuth.popup('twitter')
       .done(function (result) {
-
+          $ionicLoading.show(config.loadingTpl);
           var partyGivens = {};
 
           partyGivens.party = 'twitter';

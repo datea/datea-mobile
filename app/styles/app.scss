@@ -226,9 +226,9 @@ textarea {
 }
 
 .landing-bg {
-  background: url("../images/bg_login.png") repeat-y;
-  -webkit-background-size: 100%;
-  background-size: 100%;
+  background: url("../images/bg_login.png") repeat-y !important;
+  -webkit-background-size: 100% !important;
+  background-size: 100% !important;
 }
 
 .no-pub { font-size: 14px;}
@@ -378,20 +378,22 @@ textarea {
     //right: 0;
     top: 0;
     bottom: 0;
-    min-width: 30%;
+    min-width: 25%;
     display: inline-block;
-    padding-left: 10px;
     line-height: 44px;
-    padding-right: 15px;
+    height: 44px;
+    padding: 0 15px;
     //border-right: 1px solid black;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
     color: black;
+    padding-top: 6px;
 
     .back-icon {
       margin-right: 1px;
-      font-size: 32px !important;
-      line-height: 44px;
+      font-size: 28px !important;
+      line-height: 32px;
+      vertical-align: top;
     }
     .back-label {
       font-size: 14px !important;
@@ -721,6 +723,9 @@ ion-nav-view.main-ion-view {
       .button {
         border: 1px solid #b2b2b2;
       }
+    }
+    .no-results {
+      padding-top: 30px;
     }
   }
 }
@@ -1984,16 +1989,23 @@ ion-nav-view.main-ion-view {
 
   .geolocate-btn {
     bottom: 65px;
-    .fa-refresh {
-      -webkit-animation: spin 2s infinite linear;
-      animation: spin 2s infinite linear;
-      font-size: 20px;
-    }
   }
 
   .fitbounds-btn {
     bottom: 15px;
     font-size: 23px;
+  }
+
+  .refresh-btn {
+    bottom: 115px;
+  }
+
+  .geolocate-btn, .refresh-btn {
+    .fa-refresh {
+      -webkit-animation: spin 2s infinite linear;
+      animation: spin 2s infinite linear;
+      font-size: 20px;
+    }
   }
 
   .datear-translated .map-btn { display: none; }

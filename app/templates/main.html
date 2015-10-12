@@ -8,9 +8,9 @@
             <i class="icon ion-android-menu"></i>
               <span><img src="images/datea-logo-movil.png" alt="Logo Datea" height="32"> </span>
           </button>
-          <a class="back-btn" ng-click="header.goBack()" ng-class="{'ng-hide': !header.showBackBtn || header.noButtons}">
+          <button class="button button-clear button-dark back-btn" ng-click="header.goBack()" ng-class="{'ng-hide': !header.showBackBtn || header.noButtons}">
             <i class="back-icon icon ion-arrow-left-c" ng-class="{'ng-hide': header.stateData.backBtnLabel}"></i> <span class="back-label">{{header.stateData.backBtnLabel || header.backBtnLabel}}</span>
-          </a>
+          </button>
           <h1 class="bar-title" ng-class="{'ng-hide': !header.stateData.title}" ng-bind-html="header.stateData.title"></h1>
           <div class="buttons main-menu pull-right" ng-class="{'ng-hide': header.showBackBtn || header.noButtons}">
               <!--<a class="button button-icon icon ion-ios7-bell"></a>-->
@@ -79,6 +79,9 @@
           <div class="home" style="height:100%">
             <div class="homeSI-map-holder" id="homeSI-map-holder" data-tap-disabled="true">
               <leaflet class="leaflet-map" id="leafletHomeSI" defaults="homeSI.leaflet.defaults" markers="homeSI.leaflet.markers" center="homeSI.leaflet.center" width="100%" height="100%" layers="homeSI.leaflet.layers"></leaflet>
+              <button class="refresh-btn map-btn ng-hide" type="button" ng-click="flow.refreshMapResults()" ng-class="{'ng-hide': flow.mapUpdateActive}">
+                <i class="icon" ng-class="{'ion-android-refresh': !flow.showUpdateLoading, 'fa fa-refresh': flow.showUpdateLoading}"></i>
+              </button>
               <button class="geolocate-btn map-btn" type="button" ng-click="flow.geolocate()" ng-class="{'ng-hide': nav.map.translate}">
                 <i class="icon" ng-class="{'ion-pinpoint': !flow.geolocateLoading, 'fa fa-refresh': flow.geolocateLoading}"></i>
               </button>

@@ -73,6 +73,7 @@ angular.module('dateaMobileApp', ['ionic', 'ngCordova', 'ngResource', 'ngSanitiz
 
         .state('home.notifications', {
             url: '/notifications',
+            cache: false,
             data: {
                 title: 'Notificaciones',
                 hasMenuRight: true
@@ -197,6 +198,7 @@ angular.module('dateaMobileApp', ['ionic', 'ngCordova', 'ngResource', 'ngSanitiz
 
         .state('home.dateo', {
             url : '/dateo/:dateoId',
+            data: {title: 'Dateo'},
             views : {
                 'dateo' : {
                     templateUrl : 'templates/dateo.html',

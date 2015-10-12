@@ -7,8 +7,12 @@ function( $scope, config, Nav, $timeout, $ionicLoading, Notifications) {
 	$scope.flow = {};
 	$scope.notifications = Notifications;
 
+	$scope.flow.loading = true;
+	$ionicLoading.show(config.loadingTpl);
 	Notifications.load({}, function () {
 		Notifications.readAll();
+		$ionicLoading.hide();
+		$scope.flow.loading = false;
 	});
 
 	$scope.flow.moreNotifications = function () {

@@ -74,7 +74,14 @@ angular.module('dateaMobileApp')
                         Nav.alert.checkConnection();
                     }
                 };
-                Find.query.geolocateAndStartSearch(searchArgs);
+                
+                if (!!window.cordova) {
+                    $ionicPlatform.ready(function () {
+                        Find.query.geolocateAndStartSearch(searchArgs);
+                    });
+                }else{
+                    Find.query.geolocateAndStartSearch(searchArgs);
+                }
 
                 // get unread notifications and setup interval for checking
                 Notifications.loadUnread();
@@ -140,6 +147,22 @@ angular.module('dateaMobileApp')
                     }
                     map.fitBounds(bounds);
                 });
+            };
+
+            $scope.flow.refreshMapResults = function () {
+                var args = {
+                    callbefore: function () { $scope.flow.loadingUpdateShow(true);},
+                    callback  : function () {
+                        $scope.homeSI.leaflet.markers = Find.query.markers;
+                        $scope.flow.loadingUpdateShow(false);
+                    },
+                    onError : function () {
+                        $scope.flow.loadingUpdateShow(false);
+                        $scope.flow.geoSearchMsg = 'Error de conexión';
+                    },
+                    refresh: true
+                };
+                Find.query.updateGeoSearch(args);
             };
 
             $scope.flow.showMoreRollResults = function () {
@@ -270,7 +293,7 @@ angular.module('dateaMobileApp')
                     Find.query.updateGeoSearch(args);
                     leafletData.getMap('leafletHomeSI').then(function (map) {
                         $scope.flow.mapUpdateActive = map.getZoom() >= config.query.minQueryZoom;
-                        $scope.flow.geoSearchMsg = $scope.flow.mapUpdateActive ? '' : config.query.noSearchMsg;
+                        $scope.flow.geoSearchMsg = ''; //$scope.flow.mapUpdateActive ? '' : config.query.noSearchMsg;
                     });
                 }
             });
@@ -279,10 +302,8 @@ angular.module('dateaMobileApp')
             // EXEC ON ENTER STATE
             $scope.flow.isSignedIn = User.isSignedIn();
             if ( $scope.flow.isSignedIn) {
-              //$ionicPlatform.ready(function () {
                 onSignIn();
                 console.log('on sign in');
-              //});
             }
 
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

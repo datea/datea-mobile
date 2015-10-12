@@ -30,8 +30,8 @@ angular
                 zoom: 16
             },
             defaults : {
-                scrollWheelZoom: false,
-                zoomControl: false,
+                //scrollWheelZoom: false,
+                //zoomControl: false,
                 tap: true,
 
             },

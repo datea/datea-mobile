@@ -76,13 +76,13 @@
 
               <ion-slide-box ng-if="datear.suggestedTags.length" class="suggested-tags-slidebox" ng-class="{'has-more': datear.suggestedTags.length > datear.maxSuggested}" delegate-handle="suggestedTags" show-pager="false" on-slide-changed="datear.tagsPageChanged($index)">
                   <ion-slide>
-                      <div class="button-group">
+                      <div class="button-group clearfix">
                           <a class="button-tag" ng-class="{selected: datear.tagIsSelected(sug)}" ng-repeat="sug in datear.suggestedTags | limitTo:datear.limitSuggested track by $index" ng-click="datear.addTag( sug )">#{{ sug }}</a>
                           <a class="more-followed-tags" href ng-click="datear.toggleSuggestedExpand()" ng-class="{'ng-hide': datear.suggestedTags.length <= datear.maxSuggested}"><i class="icon" ng-class="{true: 'ion-ios-arrow-down', false: 'ion-ios-arrow-up' }[datear.limitSuggested == datear.maxSuggested]"></i></a>
                       </div>
                   </ion-slide>
                   <ion-slide ng-class="{'ng-hide': !datear.suggestedTags2.length}">
-                      <div class="button-group">
+                      <div class="button-group clearfix">
                           <a class="button-tag" ng-class="{selected: datear.tagIsSelected(sug)}" ng-repeat="sug in datear.suggestedTags2 track by $index" ng-click="datear.addTag( sug )">#{{ sug }}</a>
                       </div>
                   </ion-slide>
@@ -90,7 +90,7 @@
 
               <div class="sub-title">seleccionadas:</div>
 
-              <div class="selected-tags button-group">
+              <div class="selected-tags button-group clearfix">
                   <a class="button-tag tag-selected" ng-repeat="tag in datear.selectedTags track by $index" ng-click="datear.removeTag($index)">
                       <i class="icon ion-close-round"></i> #{{ tag }}
                   </a>

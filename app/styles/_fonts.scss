@@ -28,3 +28,10 @@ $roboto-family    : "Roboto";
     font-weight: bold;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Arrows';
+    src: url("#{$base-font-path}/PWNewArrows.ttf?v=#{$font-version}") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}

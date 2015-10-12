@@ -281,10 +281,9 @@ angular.module('dateaMobileApp')
             $scope.flow.postComment = function () {
 
                 var comment = {};
-                    //comment.comment      = $scope.formComment.textarea;
-                    comment.comment      = $scope.flow.commentInput;
-                    comment.object_id    = activeDateo.id;
-                    comment.content_type = 'dateo';
+                comment.comment      = $scope.flow.commentInput;
+                comment.object_id    = activeDateo.id;
+                comment.content_type = 'dateo';
 
                 $ionicLoading.show(config.loadingTpl);
                 try { cordova.plugins.Keyboard.close();} catch(err) {}
