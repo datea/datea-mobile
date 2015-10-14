@@ -1063,7 +1063,7 @@ ion-nav-view.main-ion-view {
         margin-top: 5px;
         text-align: left;
         line-height: 15px;
-        font-size: 15px;
+        font-size: 13px;
         .count { color: black; }
         .sublabel { color: $gray-dark-bg; font-size: 11px; line-height: 12px;}
         text-align: center;
@@ -1356,7 +1356,7 @@ ion-nav-view.main-ion-view {
     display: block;
   }
 
-  input, textarea {
+  input[type="text"], textarea {
     margin-right: 0;
     width: 100%;
   }

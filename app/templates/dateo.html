@@ -4,7 +4,7 @@
     <ion-slide-box show-pager="false" on-slide-changed="flow.slideHasChanged($index)" delegate-handle="dateosSlider">
         <ion-slide ng-repeat="dateo in listSliders track by $index">
 
-            <div class="dateo-modal-content overflow-scroll {{$index==0 && 'invisible'}}" ng-class="{invisible: !flow.showDateo, 'ng-hide': flow.hideDateo}">
+            <div class="dateo-modal-content overflow-scroll {{$index==0 && 'invisible'}}" ng-class="{invisible: !flow.showDateo, 'ng-hide': flow.hideDateo}" ng-if="$index < flow.slideIndex+2 && $index > flow.slideIndex-2">
                 <ion-content scroll="true" scrollbar-y="false" delegate-handle="{{'scrollDateo'+dateo.id}}">
 
                     <div class="map-transparent" ng-click="flow.closeDateo()" ng-class="{'ng-hide': !dateo.position}"></div>

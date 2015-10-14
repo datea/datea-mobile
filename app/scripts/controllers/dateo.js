@@ -19,6 +19,7 @@ angular.module('dateaMobileApp')
             $scope.formComment = {};
             $scope.dateFormat = config.defaultDateFormat;
             $scope.listSliders = [];
+            $scope.flow.slideIndex = 0;
 
             $scope.nav.header.setBackFunc(function () {
                 $scope.nav.reduceMap(false);
@@ -150,6 +151,7 @@ angular.module('dateaMobileApp')
             };
 
             $scope.flow.slideHasChanged = function ( index ) {
+                $scope.flow.slideIndex = index;
                 var dateo = $scope.listSliders[index];
                 initSlideItem(dateo);
             };

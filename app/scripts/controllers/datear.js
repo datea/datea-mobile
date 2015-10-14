@@ -277,7 +277,7 @@ function( $scope, $rootScope, $http, $timeout, $ionicPopup, $ionicSlideBoxDelega
         }
     });
 
-    $scope.datear.editPosition = function (val) {
+    $scope.datear.editPosition = function (val, erase) {
         $scope.datear.showEditMap = val;
         if (val) {
             Nav.datearMap(true);
@@ -287,9 +287,14 @@ function( $scope, $rootScope, $http, $timeout, $ionicPopup, $ionicSlideBoxDelega
             }, 310);
         } else {
             $scope.datear.letMapThrough = false;
-            leafletData.getMap('leafletHomeSI').then(function(map) {
-                map.setView([$scope.datear.marker.lat, $scope.datear.marker.lng], 17);
-            });
+            if (!!erase) {
+                $scope.homeSI.leaflet.markers = [];
+                delete $scope.datear.marker;
+            } else {
+                leafletData.getMap('leafletHomeSI').then(function(map) {
+                    map.setView([$scope.datear.marker.lat, $scope.datear.marker.lng], 17);
+                });
+            }
             Nav.reduceMap(true);
             $timeout(function () {
                 $scope.datear.showEditMapForm = false;

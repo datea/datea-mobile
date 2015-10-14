@@ -1,9 +1,9 @@
-<ion-view>
+
   <div class="dateo-modal datear-modal" ng-class="{'edit-pos': datear.letMapThrough}">
 
     <div class="map-edit-form" ng-class="{'ng-hide': !datear.showEditMapForm}">
       <div>
-        <p>Ubica tu dateo en el mapa</p>
+        <p>Pulsa el mapa para ubicar tu dateo.</p>
         <!--
         <label class="item item-input">
           <input type="text" id="address" ng-disabled="flow.dateaAddress" placeholder="Dirección, esquina, cruce" ng-model="datear.form.address" />
@@ -11,7 +11,7 @@
 
         <div class="row">
           <div class="col col-50">
-            <button class="button button-block button-stable" ng-click="datear.editPosition(false)" type="submit">Sin ubicación</button>
+            <button class="button button-block button-stable" ng-click="datear.editPosition(false, true)" type="submit">Sin ubicación</button>
           </div>
           <div class="col col-50">
             <button class="button button-block button-stable icon-right ion-chevron-right" ng-click="datear.editPosition(false)" type="submit">Seguir</button>
@@ -124,7 +124,7 @@
     </div>
     <div class="datear-follow-tags" ng-if="datear.showFollowTags">
       <ion-content>
-        <p class="msg">Tu dateo tiene etiquetas que no sigues. Quieres seguirlas ahora?</p>
+        <p class="msg">Tu dateo tiene etiquetas que no sigues. ¿Quieres seguirlas ahora?</p>
         <ul class="list">
           <li class="item item-checkbox" ng-repeat="tag in datear.followThisTags track by $index">
             <div class="tag">
@@ -142,4 +142,3 @@
       </ion-content>
     </div>
   </div>
-</ion-view>
